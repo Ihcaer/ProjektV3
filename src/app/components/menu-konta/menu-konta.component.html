@@ -1,0 +1,24 @@
+<div class="menuRozwijane">
+  <div class="zdjecieProfilowe">
+    <img
+      (click)="toggleMenuKonta()"
+      src="assets/images/defaultProfilowe.webp"
+      alt="Zdjęcie profilowe"
+      class="menuTrigger"
+    />
+  </div>
+  <div class="menuKonta" *ngIf="isMenuKontaOpen" [@fadeInOut]>
+    <p class="daneOsobowe">Imię Nazwisko</p>
+    <dl class="listaMenuKonta">
+      <dt class="elementyMenuKonta" (click)="przyciskUstawienia()">
+        <span class="material-symbols-outlined ikonyM"> settings </span>
+        <p class="tekstMenuKonta">Ustawienia</p>
+      </dt>
+      <mat-divider class="linia"></mat-divider>
+      <dt class="elementyMenuKonta">
+        <span class="material-symbols-outlined ikonyM"> logout </span>
+        <p class="tekstMenuKonta">Wyloguj</p>
+      </dt>
+    </dl>
+  </div>
+</div>
