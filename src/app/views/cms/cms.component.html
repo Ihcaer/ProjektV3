@@ -33,19 +33,31 @@
         </span>
         <div class="menuArtykuly" *ngIf="isMenuArtykulyOpen" [@otwieranieMenu]>
           <dl class="listaArtykuly">
-            <dt class="elementyArtykuly">
+            <dt
+              class="elementyArtykuly"
+              *ngIf="isMenuArtykulyOpen"
+              [@otwieranieMenu]
+            >
               <span class="material-symbols-outlined ikonyArtykuly">
                 clinical_notes
               </span>
               <p class="tekstMenuArtykuly">Moje</p>
             </dt>
-            <dt class="elementyArtykuly opublikowane">
+            <dt
+              class="elementyArtykuly opublikowane"
+              *ngIf="isMenuArtykulyOpen"
+              [@otwieranieMenu]
+            >
               <span class="material-symbols-outlined ikonyArtykuly">
                 full_coverage
               </span>
               <p class="tekstMenuArtykuly">Opublikowane</p>
             </dt>
-            <dt class="elementyArtykuly">
+            <dt
+              class="elementyArtykuly"
+              *ngIf="isMenuArtykulyOpen"
+              [@otwieranieMenu]
+            >
               <span class="material-symbols-outlined ikonyArtykuly">
                 schedule_send
               </span>
