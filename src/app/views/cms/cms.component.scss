@@ -4,6 +4,8 @@ $marginesMain: 8px;
 $marginesIkonSM: 15px;
 $marginesIkonSMArtykuly: 10px;
 $wielkoscSM: 175%;
+$marginesMainTelefon: 3px;
+$marginesIkonSMTelefon: 7%;
 
 .container {
   display: grid;
@@ -36,8 +38,6 @@ $wielkoscSM: 175%;
 .zdjProfilowe {
   width: 5.5%;
   height: auto;
-  /*margin-right: 0.5%;
-  margin-left: auto;*/
   margin: auto 0.5% auto auto;
 }
 .sideMenu {
@@ -159,16 +159,17 @@ $wielkoscSM: 175%;
   flex-direction: row;
   justify-content: center;
   gap: 5px;
+  border-radius: 15px;
+  margin: 0 10px;
+}
+.przyciskWyloguj:hover {
+  background-color: rgba(80, 80, 80, 0.3764705882);
 }
 .ikonaWylogowanie {
   color: #ffffff;
   font-size: 40px;
 }
 .wylogujTekst {
-  /*display: table-cell;
-  vertical-align: bottom;*/
-  /*text-align: center;
-  margin-top: 2.5px;*/
   margin: auto 0;
   font-size: 30px;
 }
@@ -179,4 +180,295 @@ $wielkoscSM: 175%;
   border-radius: 40px;
   background-color: #ffffff;
   box-shadow: $cien;
+}
+
+@media only screen and (max-width: 480px) {
+  .header {
+    margin: 4px $marginesMainTelefon 2px;
+    border-radius: 35px;
+  }
+  .header > h1 {
+    transform: translate(-25%, -50%);
+  }
+  .zdjProfilowe {
+    width: 18%;
+    height: auto;
+    margin: auto 1.5% auto auto;
+  }
+  .sideMenu {
+    margin: $marginesMainTelefon;
+    border-radius: 25px;
+  }
+  .elementyListySideMenu {
+    padding: 2px;
+    width: 70%;
+    margin-left: $marginesIkonSMTelefon;
+  }
+  .tekstSM {
+    display: none;
+  }
+  .ikonySM {
+    margin-right: 0;
+  }
+  .menuArtykuly {
+    margin-left: 0;
+    padding-bottom: 10px;
+  }
+  .strzalkaArtykuly {
+    margin-left: 0;
+  }
+  .elementyArtykuly {
+    margin-left: $marginesIkonSMTelefon;
+  }
+  .elementyArtykuly > p {
+    display: none;
+  }
+  .przyciskWyloguj {
+    margin: 0;
+    padding: 7% 10%;
+  }
+  .wylogujTekst {
+    display: none;
+  }
+  .main {
+    margin: $marginesMainTelefon;
+    border-radius: 35px;
+  }
+}
+
+@media only screen and (min-width: 481px) and (max-width: 767px) {
+  .container {
+    grid-template-columns: 13% auto;
+  }
+  .header {
+    margin: 4px $marginesMainTelefon 2px;
+    border-radius: 35px;
+  }
+  .header > h1 {
+    transform: translate(-25%, -50%);
+  }
+  .zdjProfilowe {
+    width: 16%;
+    height: auto;
+    margin: auto 1.5% auto auto;
+  }
+  .sideMenu {
+    margin: $marginesMainTelefon;
+    border-radius: 25px;
+  }
+  .elementyListySideMenu {
+    padding: 2px;
+    width: 70%;
+    margin-left: $marginesIkonSMTelefon;
+  }
+  .tekstSM {
+    display: none;
+  }
+  .ikonySM {
+    margin-right: 0;
+  }
+  .menuArtykuly {
+    margin-left: 0;
+    padding-bottom: 10px;
+  }
+  .strzalkaArtykuly {
+    margin-left: 0;
+  }
+  .elementyArtykuly {
+    margin-left: $marginesIkonSMTelefon;
+  }
+  .elementyArtykuly > p {
+    display: none;
+  }
+  .przyciskWyloguj {
+    margin: 0;
+    padding: 7% 10%;
+  }
+  .wylogujTekst {
+    display: none;
+  }
+  .main {
+    margin: $marginesMainTelefon;
+    border-radius: 35px;
+  }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 1199px) {
+  .container {
+    grid-template-columns: 10% auto;
+  }
+  .header {
+    margin: 4px $marginesMainTelefon 2px;
+    border-radius: 35px;
+  }
+  .header > h1 {
+    transform: translate(-35%, -50%);
+  }
+  .zdjProfilowe {
+    width: 10%;
+    height: auto;
+    margin: auto 1.5% auto auto;
+  }
+  .sideMenu {
+    margin: $marginesMainTelefon;
+    border-radius: 25px;
+  }
+  .elementyListySideMenu {
+    padding: 2px;
+    width: 70%;
+    margin-left: $marginesIkonSMTelefon;
+  }
+  .tekstSM {
+    display: none;
+  }
+  .ikonySM {
+    margin-right: 0;
+  }
+  .menuArtykuly {
+    margin-left: 0;
+    padding-bottom: 10px;
+  }
+  .strzalkaArtykuly {
+    margin-left: 0;
+  }
+  .elementyArtykuly {
+    margin-left: $marginesIkonSMTelefon;
+  }
+  .elementyArtykuly > p {
+    display: none;
+  }
+  .przyciskWyloguj {
+    margin: 0;
+    padding: 7% 10%;
+  }
+  .wylogujTekst {
+    display: none;
+  }
+  .main {
+    margin: $marginesMainTelefon;
+    border-radius: 35px;
+  }
+}
+
+@media only screen and (min-width: 1200px) and (max-width: 1399px) {
+  .container {
+    grid-template-columns: 6% auto;
+  }
+  .header {
+    margin: 4px $marginesMainTelefon 2px;
+    border-radius: 35px;
+  }
+  .header > h1 {
+    transform: translate(-35%, -50%);
+  }
+  .zdjProfilowe {
+    width: 7%;
+    height: auto;
+    margin: auto 1% auto auto;
+  }
+  .sideMenu {
+    margin: $marginesMainTelefon;
+    border-radius: 25px;
+  }
+  .elementyListySideMenu {
+    padding: 2px;
+    width: 70%;
+    margin-left: $marginesIkonSMTelefon;
+  }
+  .tekstSM {
+    display: none;
+  }
+  .ikonySM {
+    margin-right: 0;
+  }
+  .menuArtykuly {
+    margin-left: 0;
+    padding-bottom: 10px;
+  }
+  .strzalkaArtykuly {
+    margin-left: 0;
+  }
+  .elementyArtykuly {
+    margin-left: $marginesIkonSMTelefon;
+  }
+  .elementyArtykuly > p {
+    display: none;
+  }
+  .przyciskWyloguj {
+    margin: 0;
+    padding: 7% 10%;
+  }
+  .wylogujTekst {
+    display: none;
+  }
+  .main {
+    margin: $marginesMainTelefon;
+    border-radius: 35px;
+  }
+}
+
+@media only screen and (min-width: 1400px) and (max-width: 1599px) {
+  .container {
+    grid-template-columns: 5% auto;
+  }
+  .header {
+    margin: 4px $marginesMainTelefon 2px;
+    border-radius: 35px;
+  }
+  .header > h1 {
+    transform: translate(-35%, -50%);
+  }
+  .zdjProfilowe {
+    width: 6.5%;
+    height: auto;
+    margin: auto 1% auto auto;
+  }
+  .sideMenu {
+    margin: $marginesMainTelefon;
+    border-radius: 25px;
+  }
+  .elementyListySideMenu {
+    padding: 2px;
+    width: 70%;
+    margin-left: $marginesIkonSMTelefon;
+  }
+  .tekstSM {
+    display: none;
+  }
+  .ikonySM {
+    margin-right: 0;
+  }
+  .menuArtykuly {
+    margin-left: 0;
+    padding-bottom: 10px;
+  }
+  .strzalkaArtykuly {
+    margin-left: 0;
+  }
+  .elementyArtykuly {
+    margin-left: $marginesIkonSMTelefon;
+  }
+  .elementyArtykuly > p {
+    display: none;
+  }
+  .przyciskWyloguj {
+    margin: 0;
+    padding: 7% 10%;
+  }
+  .wylogujTekst {
+    display: none;
+  }
+  .main {
+    margin: $marginesMainTelefon;
+    border-radius: 35px;
+  }
+}
+
+@media only screen and (min-width: 1600px) and (max-width: 1700px) {
+  .container {
+    grid-template-columns: 21.5% auto;
+  }
+  .listaSideMenu {
+    margin-left: 4%;
+  }
 }

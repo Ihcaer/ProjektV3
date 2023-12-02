@@ -6,7 +6,6 @@ $marginesIkon: 6px;
   display: flex;
   align-items: flex-start;
   margin-left: auto;
-  //flex-direction: column;
 }
 .zdjecieProfilowe {
   position: relative;
@@ -86,4 +85,64 @@ $marginesIkon: 6px;
 }
 .linia {
   border-top-color: #ffffff;
+}
+
+@media only screen and (min-width: 2100px) and (max-width: 2700px) {
+  .menuKonta {
+    margin-top: -21%;
+    height: 141%;
+  }
+  .daneOsobowe {
+    font-size: 31px;
+    margin-top: 8%;
+  }
+  .ikonyM {
+    font-size: 30px;
+  }
+  .tekstMenuKonta {
+    font-size: 26px;
+  }
+}
+@media only screen and (min-width: 1400px) and (max-width: 1699px) {
+  .menuKonta {
+    margin: -1% 0 0 -195%;
+    width: 311%;
+    height: 100%;
+  }
+  .daneOsobowe {
+    font-size: 23px;
+  }
+  .ikonyM {
+    font-size: 22px;
+  }
+  .tekstMenuKonta {
+    font-size: 18px;
+  }
+}
+@media only screen and (min-width: 1000px) and (max-width: 1399px) {
+  .menuKonta {
+    margin: -25% 0 0 -203%;
+    width: 318%;
+    height: 148%;
+  }
+  .daneOsobowe {
+    margin-top: 7%;
+  }
+}
+@media only screen and (max-width: 480px) {
+  .menuKonta {
+    margin: -21% 0 0 -213%;
+    width: 323%;
+    height: 139%;
+  }
+  .daneOsobowe {
+    font-size: 19px;
+    margin: 6% 0 0 8%;
+  }
+  .ikonyM {
+    font-size: 18px;
+  }
+  .tekstMenuKonta {
+    font-size: 14px;
+  }
 }
