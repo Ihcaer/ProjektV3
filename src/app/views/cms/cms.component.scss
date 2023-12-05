@@ -59,6 +59,9 @@ $marginesIkonSMTelefon: 7%;
   margin-left: 7%;
   align-self: flex-start;
 }
+.hamburgerMenu {
+  display: none;
+}
 .elementyListySideMenu {
   display: flex;
   flex-direction: row;
@@ -198,6 +201,10 @@ $marginesIkonSMTelefon: 7%;
   .sideMenu {
     margin: $marginesMainTelefon;
     border-radius: 25px;
+  }
+  .hamburgerMenu {
+    display: block;
+    margin: 0 0 25px 21%;
   }
   .elementyListySideMenu {
     padding: 2px;

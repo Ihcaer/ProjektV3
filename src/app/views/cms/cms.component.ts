@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Title } from '@angular/platform-browser';
 import { Router, RouterOutlet } from '@angular/router';
@@ -6,13 +6,13 @@ import { trigger, state, style, animate, transition, query, stagger } from '@ang
 
 import { CmsPodswietlenieSMService } from '../../services/cms-podswietlenie-sm/cms-podswietlenie-sm.service';
 import { MenuKontaComponent } from '../../components/menu-konta/menu-konta.component';
+import { HamburgerMenuIconComponent } from "../../components/hamburger-menu-icon/hamburger-menu-icon.component";
 
 @Component({
   selector: 'app-cms',
   standalone: true,
   templateUrl: './cms.component.html',
   styleUrl: './cms.component.scss',
-  imports: [CommonModule, MenuKontaComponent, RouterOutlet],
   animations: [
     /*trigger('otwieranieMenu', [
       transition(':enter', [
@@ -52,13 +52,13 @@ import { MenuKontaComponent } from '../../components/menu-konta/menu-konta.compo
       ])
     ])
   ],
+  imports: [CommonModule, MenuKontaComponent, RouterOutlet, HamburgerMenuIconComponent]
 })
 export class CmsComponent implements OnInit {
 
   constructor(private titleService: Title, private router: Router, protected podswietlenieSM: CmsPodswietlenieSMService, private cdRef: ChangeDetectorRef) {
     this.titleService.setTitle('CMS');
   }
-
 
   ngOnInit() {
     this.podswietlenieSM.activeAktywnosc = true;
