@@ -1,111 +1,103 @@
-<div class="all" [ngClass]="{ open: menuState }">
-  <div
-    class="container"
-    [ngStyle]="{
-      'grid-template-columns': menuState === 'open' ? '19% auto' : ''
+<div
+  class="container"
+  [ngStyle]="{
+      'grid-template-columns': menuState === 'open' ? '300px auto' : '',
     }"
-  >
-    <div class="header">
-      <h1>CMS</h1>
-      <div class="zdjProfilowe">
-        <app-menu-konta></app-menu-konta>
-      </div>
+>
+  <div class="header">
+    <h1>CMS</h1>
+    <div class="zdjProfilowe">
+      <app-menu-konta></app-menu-konta>
     </div>
-    <div class="sideMenu">
-      <div class="listaSideMenu">
-        <div class="hamburgerMenu">
-          <div class="menu-icon" (click)="toggleMenu()">
-            <span class="bar" [@menuAnimation]="menuState"></span>
-            <span class="bar" [@menuAnimation]="menuState"></span>
-            <span class="bar" [@menuAnimation]="menuState"></span>
-          </div>
-        </div>
-        <div
-          class="elementyListySideMenu"
-          (click)="navigateToCMS()"
-          [ngClass]="{
-            podswietlenieAktywnosc: podswietlenieSM.activeAktywnosc
-          }"
-        >
-          <span class="material-symbols-outlined ikonySM"> history </span>
-          <p class="tekstSM">Aktywność</p>
-        </div>
-        <div class="elementyListySideMenu">
-          <span class="material-symbols-outlined ikonySM"> contract_edit </span>
-          <p class="tekstSM">Edytor</p>
-        </div>
-        <div
-          class="elementyListySideMenu artykuly"
-          (click)="toggleMenuArtykuly()"
-        >
-          <span class="material-symbols-outlined ikonySM"> newsmode </span>
-          <p class="tekstSM">Artykuły</p>
-          <span
-            class="material-symbols-outlined ikonySM strzalkaArtykuly"
-            [@obrotStrzalki]="isMenuArtykulyOpen ? 'open' : 'closed'"
-          >
-            expand_more
-          </span>
-          <div
-            class="menuArtykuly"
-            *ngIf="isMenuArtykulyOpen"
-            [@otwieranieMenu]
-          >
-            <dl class="listaArtykuly">
-              <dt
-                class="elementyArtykuly"
-                *ngIf="isMenuArtykulyOpen"
-                [@otwieranieMenu]
-              >
-                <span class="material-symbols-outlined ikonyArtykuly">
-                  clinical_notes
-                </span>
-                <p class="tekstMenuArtykuly">Moje</p>
-              </dt>
-              <dt
-                class="elementyArtykuly opublikowane"
-                *ngIf="isMenuArtykulyOpen"
-                [@otwieranieMenu]
-              >
-                <span class="material-symbols-outlined ikonyArtykuly">
-                  full_coverage
-                </span>
-                <p class="tekstMenuArtykuly">Opublikowane</p>
-              </dt>
-              <dt
-                class="elementyArtykuly"
-                *ngIf="isMenuArtykulyOpen"
-                [@otwieranieMenu]
-              >
-                <span class="material-symbols-outlined ikonyArtykuly">
-                  schedule_send
-                </span>
-                <p class="tekstMenuArtykuly">Nieopublikowane</p>
-              </dt>
-            </dl>
-          </div>
-        </div>
-        <div class="elementyListySideMenu">
-          <span class="material-symbols-outlined ikonySM"> groups </span>
-          <p class="tekstSM">Użytkownicy</p>
-        </div>
-        <div class="elementyListySideMenu">
-          <span class="material-symbols-outlined ikonySM"> badge </span>
-          <p class="tekstSM">Pracownicy</p>
-        </div>
-      </div>
-      <div class="wylogowanie">
-        <div class="linia">
-          <hr />
-        </div>
-        <div class="przyciskWyloguj">
-          <span class="material-symbols-outlined ikonaWylogowanie">
-            logout
-          </span>
-          <p class="wylogujTekst">WYLOGUJ</p>
-        </div>
-      </div>
-    </div>
-    <div class="main"><router-outlet></router-outlet></div>
   </div>
+  <div class="sideMenu">
+    <div class="listaSideMenu">
+      <div class="hamburgerMenu">
+        <div class="menu-icon" (click)="toggleMenu()">
+          <span class="bar" [@menuAnimation]="menuState"></span>
+          <span class="bar" [@menuAnimation]="menuState"></span>
+          <span class="bar" [@menuAnimation]="menuState"></span>
+        </div>
+      </div>
+      <div
+        class="elementyListySideMenu"
+        (click)="navigateToCMS()"
+        [ngClass]="{
+          podswietlenieAktywnosc: podswietlenieSM.activeAktywnosc
+        }"
+      >
+        <span class="material-symbols-outlined ikonySM"> history </span>
+        <p class="tekstSM">Aktywność</p>
+      </div>
+      <div class="elementyListySideMenu">
+        <span class="material-symbols-outlined ikonySM"> contract_edit </span>
+        <p class="tekstSM">Edytor</p>
+      </div>
+      <div
+        class="elementyListySideMenu artykuly"
+        (click)="toggleMenuArtykuly()"
+      >
+        <span class="material-symbols-outlined ikonySM"> newsmode </span>
+        <p class="tekstSM">Artykuły</p>
+        <span
+          class="material-symbols-outlined ikonySM strzalkaArtykuly"
+          [@obrotStrzalki]="isMenuArtykulyOpen ? 'open' : 'closed'"
+        >
+          expand_more
+        </span>
+        <div class="menuArtykuly" *ngIf="isMenuArtykulyOpen" [@otwieranieMenu]>
+          <dl class="listaArtykuly">
+            <dt
+              class="elementyArtykuly"
+              *ngIf="isMenuArtykulyOpen"
+              [@otwieranieMenu]
+            >
+              <span class="material-symbols-outlined ikonyArtykuly">
+                clinical_notes
+              </span>
+              <p class="tekstMenuArtykuly">Moje</p>
+            </dt>
+            <dt
+              class="elementyArtykuly opublikowane"
+              *ngIf="isMenuArtykulyOpen"
+              [@otwieranieMenu]
+            >
+              <span class="material-symbols-outlined ikonyArtykuly">
+                full_coverage
+              </span>
+              <p class="tekstMenuArtykuly">Opublikowane</p>
+            </dt>
+            <dt
+              class="elementyArtykuly"
+              *ngIf="isMenuArtykulyOpen"
+              [@otwieranieMenu]
+            >
+              <span class="material-symbols-outlined ikonyArtykuly">
+                schedule_send
+              </span>
+              <p class="tekstMenuArtykuly">Nieopublikowane</p>
+            </dt>
+          </dl>
+        </div>
+      </div>
+      <div class="elementyListySideMenu">
+        <span class="material-symbols-outlined ikonySM"> groups </span>
+        <p class="tekstSM">Użytkownicy</p>
+      </div>
+      <div class="elementyListySideMenu">
+        <span class="material-symbols-outlined ikonySM"> badge </span>
+        <p class="tekstSM">Pracownicy</p>
+      </div>
+    </div>
+    <div class="wylogowanie">
+      <div class="linia">
+        <hr />
+      </div>
+      <div class="przyciskWyloguj">
+        <span class="material-symbols-outlined ikonaWylogowanie"> logout </span>
+        <p class="wylogujTekst">WYLOGUJ</p>
+      </div>
+    </div>
+  </div>
+  <div class="main"><router-outlet></router-outlet></div>
 </div>
