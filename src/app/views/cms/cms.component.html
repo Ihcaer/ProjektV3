@@ -25,20 +25,36 @@
         [ngClass]="{
           podswietlenieAktywnosc: podswietlenieSM.activeAktywnosc
         }"
+        [ngStyle]="{'width': menuState === 'open' ? '93%' : '',}"
       >
         <span class="material-symbols-outlined ikonySM"> history </span>
-        <p class="tekstSM">Aktywność</p>
+        <p
+          class="tekstSM"
+          [ngStyle]="{'display': menuState === 'open' ? 'block' : '',}"
+        >
+          Aktywność
+        </p>
       </div>
       <div class="elementyListySideMenu">
         <span class="material-symbols-outlined ikonySM"> contract_edit </span>
-        <p class="tekstSM">Edytor</p>
+        <p
+          class="tekstSM"
+          [ngStyle]="{'display': menuState === 'open' ? 'block' : '',}"
+        >
+          Edytor
+        </p>
       </div>
       <div
         class="elementyListySideMenu artykuly"
         (click)="toggleMenuArtykuly()"
       >
         <span class="material-symbols-outlined ikonySM"> newsmode </span>
-        <p class="tekstSM">Artykuły</p>
+        <p
+          class="tekstSM"
+          [ngStyle]="{'display': menuState === 'open' ? 'block' : '',}"
+        >
+          Artykuły
+        </p>
         <span
           class="material-symbols-outlined ikonySM strzalkaArtykuly"
           [@obrotStrzalki]="isMenuArtykulyOpen ? 'open' : 'closed'"
@@ -80,13 +96,29 @@
           </dl>
         </div>
       </div>
-      <div class="elementyListySideMenu">
+      <div
+        class="elementyListySideMenu"
+        [ngStyle]="{'width': menuState === 'open' ? '100%' : '',}"
+      >
         <span class="material-symbols-outlined ikonySM"> groups </span>
-        <p class="tekstSM">Użytkownicy</p>
+        <p
+          class="tekstSM"
+          [ngStyle]="{'display': menuState === 'open' ? 'block' : '',}"
+        >
+          Użytkownicy
+        </p>
       </div>
-      <div class="elementyListySideMenu">
+      <div
+        class="elementyListySideMenu"
+        [ngStyle]="{'width': menuState === 'open' ? '100%' : '',}"
+      >
         <span class="material-symbols-outlined ikonySM"> badge </span>
-        <p class="tekstSM">Pracownicy</p>
+        <p
+          class="tekstSM"
+          [ngStyle]="{'display': menuState === 'open' ? 'block' : '',}"
+        >
+          Pracownicy
+        </p>
       </div>
     </div>
     <div class="wylogowanie">
@@ -95,7 +127,12 @@
       </div>
       <div class="przyciskWyloguj">
         <span class="material-symbols-outlined ikonaWylogowanie"> logout </span>
-        <p class="wylogujTekst">WYLOGUJ</p>
+        <p
+          class="wylogujTekst"
+          [ngStyle]="{'display': menuState === 'open' ? 'block' : '',}"
+        >
+          WYLOGUJ
+        </p>
       </div>
     </div>
   </div>
