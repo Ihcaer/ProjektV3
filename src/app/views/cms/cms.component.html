@@ -1,7 +1,7 @@
 <div
   class="container"
   [ngStyle]="{
-      'grid-template-columns': menuState === 'open' ? '300px auto' : '',
+      'grid-template-columns': menuState === 'open' ? '272px auto' : '',
     }"
 >
   <div class="header">
@@ -11,13 +11,27 @@
     </div>
   </div>
   <div class="sideMenu">
-    <div class="listaSideMenu">
-      <div class="hamburgerMenu">
-        <div class="menu-icon" (click)="toggleMenu()">
+    <div
+      class="listaSideMenu"
+      [ngStyle]="{'margin': menuState === 'open' ? '0.5% 0 0 -2.9%' : '',}"
+    >
+      <div
+        class="hamburgerMenu"
+        (click)="toggleMenu()"
+        [ngStyle]="{'margin-left': menuState === 'open' ? '11%' : '',}"
+      >
+        <div class="menu-icon">
           <span class="bar" [@menuAnimation]="menuState"></span>
           <span class="bar" [@menuAnimation]="menuState"></span>
           <span class="bar" [@menuAnimation]="menuState"></span>
         </div>
+        <p
+          class="tekstHamburgerMenu"
+          [ngStyle]="{
+            display: menuState === 'open' ? 'block' : '',}"
+        >
+          Zwiń
+        </p>
       </div>
       <div
         class="elementyListySideMenu"
@@ -47,6 +61,7 @@
       <div
         class="elementyListySideMenu artykuly"
         (click)="toggleMenuArtykuly()"
+        [ngStyle]="{'width': menuState === 'open' ? '91%' : '',}"
       >
         <span class="material-symbols-outlined ikonySM"> newsmode </span>
         <p
@@ -71,7 +86,12 @@
               <span class="material-symbols-outlined ikonyArtykuly">
                 clinical_notes
               </span>
-              <p class="tekstMenuArtykuly">Moje</p>
+              <p
+                class="tekstMenuArtykuly"
+                [ngStyle]="{'display': menuState === 'open' ? 'block' : '',}"
+              >
+                Moje
+              </p>
             </dt>
             <dt
               class="elementyArtykuly opublikowane"
@@ -81,7 +101,12 @@
               <span class="material-symbols-outlined ikonyArtykuly">
                 full_coverage
               </span>
-              <p class="tekstMenuArtykuly">Opublikowane</p>
+              <p
+                class="tekstMenuArtykuly"
+                [ngStyle]="{'display': menuState === 'open' ? 'block' : '',}"
+              >
+                Opublikowane
+              </p>
             </dt>
             <dt
               class="elementyArtykuly"
@@ -91,7 +116,12 @@
               <span class="material-symbols-outlined ikonyArtykuly">
                 schedule_send
               </span>
-              <p class="tekstMenuArtykuly">Nieopublikowane</p>
+              <p
+                class="tekstMenuArtykuly"
+                [ngStyle]="{'display': menuState === 'open' ? 'block' : '',}"
+              >
+                Nieopublikowane
+              </p>
             </dt>
           </dl>
         </div>
@@ -125,7 +155,10 @@
       <div class="linia">
         <hr />
       </div>
-      <div class="przyciskWyloguj">
+      <div
+        class="przyciskWyloguj"
+        [ngStyle]="{'padding': menuState === 'open' ? '0' : '',}"
+      >
         <span class="material-symbols-outlined ikonaWylogowanie"> logout </span>
         <p
           class="wylogujTekst"

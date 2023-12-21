@@ -6,7 +6,6 @@ import { trigger, state, style, animate, transition, query, stagger } from '@ang
 
 import { CmsPodswietlenieSMService } from '../../services/cms-podswietlenie-sm/cms-podswietlenie-sm.service';
 import { MenuKontaComponent } from '../../components/menu-konta/menu-konta.component';
-import { HamburgerMenuIconComponent } from "../../components/hamburger-menu-icon/hamburger-menu-icon.component";
 
 @Component({
   selector: 'app-cms',
@@ -61,7 +60,7 @@ import { HamburgerMenuIconComponent } from "../../components/hamburger-menu-icon
       transition('closed <=> open', animate('0.3s ease-in-out'))
     ])
   ],
-  imports: [CommonModule, MenuKontaComponent, RouterOutlet, HamburgerMenuIconComponent]
+  imports: [CommonModule, MenuKontaComponent, RouterOutlet]
 })
 export class CmsComponent implements OnInit {
   menuState: string = 'closed';

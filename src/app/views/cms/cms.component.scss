@@ -60,15 +60,17 @@ $marginesIkonSMTelefon: 7%;
 }
 .hamburgerMenu {
   display: none;
+  align-items: center;
+  gap: 23%;
+  cursor: pointer;
+  height: 5%;
 }
 .menu-icon {
   display: block;
-  cursor: pointer;
   width: 30px;
   height: 20px;
   position: relative;
 }
-
 .bar {
   display: block;
   width: 100%;
@@ -76,6 +78,12 @@ $marginesIkonSMTelefon: 7%;
   background-color: #91cbb1;
   margin: 6px 0;
   transition: transform 0.3s ease-in-out;
+}
+.tekstHamburgerMenu {
+  display: none;
+  font-size: 32px;
+  margin-bottom: -16.5px;
+  color: #91cbb1;
 }
 .elementyListySideMenu {
   display: flex;
@@ -218,7 +226,7 @@ $marginesIkonSMTelefon: 7%;
     border-radius: 25px;
   }
   .hamburgerMenu {
-    display: block;
+    display: flex;
     margin: 0 0 25px 21%;
   }
   .elementyListySideMenu {
@@ -279,7 +287,7 @@ $marginesIkonSMTelefon: 7%;
     border-radius: 25px;
   }
   .hamburgerMenu {
-    display: block;
+    display: flex;
     margin: 0 0 25px 21%;
   }
   .elementyListySideMenu {
@@ -340,7 +348,7 @@ $marginesIkonSMTelefon: 7%;
     border-radius: 25px;
   }
   .hamburgerMenu {
-    display: block;
+    display: flex;
     margin: 0 0 25px 21%;
   }
   .elementyListySideMenu {
@@ -401,7 +409,7 @@ $marginesIkonSMTelefon: 7%;
     border-radius: 25px;
   }
   .hamburgerMenu {
-    display: block;
+    display: flex;
     margin: 0 0 25px 21%;
   }
   .elementyListySideMenu {
@@ -462,7 +470,7 @@ $marginesIkonSMTelefon: 7%;
     border-radius: 25px;
   }
   .hamburgerMenu {
-    display: block;
+    display: flex;
     margin: 0 0 25px 21%;
   }
   .elementyListySideMenu {
