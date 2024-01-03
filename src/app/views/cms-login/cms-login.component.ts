@@ -9,5 +9,12 @@ import { CommonModule } from '@angular/common';
   styleUrl: './cms-login.component.scss'
 })
 export class CmsLoginComponent {
+  user = {
+    email: '',
+    haslo: ''
+  };
 
+  zaloguj() {
+    console.log(this.user);
+  }
 }
