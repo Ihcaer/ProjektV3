@@ -16,5 +16,5 @@ export class CmsLoginComponent {
 
   zaloguj() {
     console.log(this.user);
-  }
+  };
 }

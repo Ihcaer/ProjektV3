@@ -1,6 +1,22 @@
 <div class="container">
   <div class="main">
     <div class="napisLogowanie">Logowanie</div>
-    <div class="formularz"><form (ngSubmit)="zaloguj()"></form></div>
+    <div class="cmsLogowanieFormularz">
+      <form (ngSubmit)="zaloguj()">
+        <div class="cmsEmail">
+          <label for="email" class="cmsLoginOznaczenie">E-mail</label
+          ><input
+            type="text"
+            id="email"
+            name="email"
+            (ngModel)="(user.email)"
+          />
+        </div>
+        <div class="cmsHaslo">
+          <label for="haslo" class="cmsLoginOznaczenie">Hasło</label>
+          <input type="text" id="haslo" name="haslo" (ngModel)="(user.haslo)" />
+        </div>
+      </form>
+    </div>
   </div>
 </div>
