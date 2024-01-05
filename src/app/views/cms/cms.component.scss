@@ -12,7 +12,6 @@ $marginesIkonSMTelefon: 7%;
   grid-template-rows: 15% auto;
   grid-template-columns: 19% auto;
   background-color: #f2f2f2;
-  width: 100%;
   height: 100%;
 }
 .header {
@@ -61,6 +60,30 @@ $marginesIkonSMTelefon: 7%;
 }
 .hamburgerMenu {
   display: none;
+  align-items: center;
+  gap: 23%;
+  cursor: pointer;
+  height: 5%;
+}
+.menu-icon {
+  display: block;
+  width: 30px;
+  height: 20px;
+  position: relative;
+}
+.bar {
+  display: block;
+  width: 100%;
+  height: 4px;
+  background-color: #91cbb1;
+  margin: 6px 0;
+  transition: transform 0.3s ease-in-out;
+}
+.tekstHamburgerMenu {
+  display: none;
+  font-size: 32px;
+  margin-bottom: -16.5px;
+  color: #91cbb1;
 }
 .elementyListySideMenu {
   display: flex;
@@ -203,7 +226,7 @@ $marginesIkonSMTelefon: 7%;
     border-radius: 25px;
   }
   .hamburgerMenu {
-    display: block;
+    display: flex;
     margin: 0 0 25px 21%;
   }
   .elementyListySideMenu {
@@ -263,6 +286,10 @@ $marginesIkonSMTelefon: 7%;
     margin: $marginesMainTelefon;
     border-radius: 25px;
   }
+  .hamburgerMenu {
+    display: flex;
+    margin: 0 0 25px 21%;
+  }
   .elementyListySideMenu {
     padding: 2px;
     width: 70%;
@@ -319,6 +346,10 @@ $marginesIkonSMTelefon: 7%;
   .sideMenu {
     margin: $marginesMainTelefon;
     border-radius: 25px;
+  }
+  .hamburgerMenu {
+    display: flex;
+    margin: 0 0 25px 21%;
   }
   .elementyListySideMenu {
     padding: 2px;
@@ -377,6 +408,10 @@ $marginesIkonSMTelefon: 7%;
     margin: $marginesMainTelefon;
     border-radius: 25px;
   }
+  .hamburgerMenu {
+    display: flex;
+    margin: 0 0 25px 21%;
+  }
   .elementyListySideMenu {
     padding: 2px;
     width: 70%;
@@ -433,6 +468,10 @@ $marginesIkonSMTelefon: 7%;
   .sideMenu {
     margin: $marginesMainTelefon;
     border-radius: 25px;
+  }
+  .hamburgerMenu {
+    display: flex;
+    margin: 0 0 25px 21%;
   }
   .elementyListySideMenu {
     padding: 2px;

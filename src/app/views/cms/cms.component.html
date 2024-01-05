@@ -1,4 +1,9 @@
-<div class="container">
+<div
+  class="container"
+  [ngStyle]="{
+      'grid-template-columns': menuState === 'open' ? '272px auto' : '',
+    }"
+>
   <div class="header">
     <h1>CMS</h1>
     <div class="zdjProfilowe">
@@ -6,28 +11,65 @@
     </div>
   </div>
   <div class="sideMenu">
-    <div class="listaSideMenu">
-      <div class="hamburgerMenu">
-        <app-hamburger-menu-icon></app-hamburger-menu-icon>
+    <div
+      class="listaSideMenu"
+      [ngStyle]="{'margin': menuState === 'open' ? '0.5% 0 0 -2.9%' : '',}"
+    >
+      <div
+        class="hamburgerMenu"
+        (click)="toggleMenu()"
+        [ngStyle]="{'margin-left': menuState === 'open' ? '11%' : '',}"
+      >
+        <div class="menu-icon">
+          <span class="bar" [@menuAnimation]="menuState"></span>
+          <span class="bar" [@menuAnimation]="menuState"></span>
+          <span class="bar" [@menuAnimation]="menuState"></span>
+        </div>
+        <p
+          class="tekstHamburgerMenu"
+          [ngStyle]="{
+            display: menuState === 'open' ? 'block' : '',}"
+        >
+          Zwiń
+        </p>
       </div>
       <div
         class="elementyListySideMenu"
         (click)="navigateToCMS()"
-        [ngClass]="{ podswietlenieAktywnosc: podswietlenieSM.activeAktywnosc }"
+        [ngClass]="{
+          podswietlenieAktywnosc: podswietlenieSM.activeAktywnosc
+        }"
+        [ngStyle]="{'width': menuState === 'open' ? '93%' : '',}"
       >
         <span class="material-symbols-outlined ikonySM"> history </span>
-        <p class="tekstSM">Aktywność</p>
+        <p
+          class="tekstSM"
+          [ngStyle]="{'display': menuState === 'open' ? 'block' : '',}"
+        >
+          Aktywność
+        </p>
       </div>
       <div class="elementyListySideMenu">
         <span class="material-symbols-outlined ikonySM"> contract_edit </span>
-        <p class="tekstSM">Edytor</p>
+        <p
+          class="tekstSM"
+          [ngStyle]="{'display': menuState === 'open' ? 'block' : '',}"
+        >
+          Edytor
+        </p>
       </div>
       <div
         class="elementyListySideMenu artykuly"
         (click)="toggleMenuArtykuly()"
+        [ngStyle]="{'width': menuState === 'open' ? '91%' : '',}"
       >
         <span class="material-symbols-outlined ikonySM"> newsmode </span>
-        <p class="tekstSM">Artykuły</p>
+        <p
+          class="tekstSM"
+          [ngStyle]="{'display': menuState === 'open' ? 'block' : '',}"
+        >
+          Artykuły
+        </p>
         <span
           class="material-symbols-outlined ikonySM strzalkaArtykuly"
           [@obrotStrzalki]="isMenuArtykulyOpen ? 'open' : 'closed'"
@@ -44,7 +86,12 @@
               <span class="material-symbols-outlined ikonyArtykuly">
                 clinical_notes
               </span>
-              <p class="tekstMenuArtykuly">Moje</p>
+              <p
+                class="tekstMenuArtykuly"
+                [ngStyle]="{'display': menuState === 'open' ? 'block' : '',}"
+              >
+                Moje
+              </p>
             </dt>
             <dt
               class="elementyArtykuly opublikowane"
@@ -54,7 +101,12 @@
               <span class="material-symbols-outlined ikonyArtykuly">
                 full_coverage
               </span>
-              <p class="tekstMenuArtykuly">Opublikowane</p>
+              <p
+                class="tekstMenuArtykuly"
+                [ngStyle]="{'display': menuState === 'open' ? 'block' : '',}"
+              >
+                Opublikowane
+              </p>
             </dt>
             <dt
               class="elementyArtykuly"
@@ -64,27 +116,56 @@
               <span class="material-symbols-outlined ikonyArtykuly">
                 schedule_send
               </span>
-              <p class="tekstMenuArtykuly">Nieopublikowane</p>
+              <p
+                class="tekstMenuArtykuly"
+                [ngStyle]="{'display': menuState === 'open' ? 'block' : '',}"
+              >
+                Nieopublikowane
+              </p>
             </dt>
           </dl>
         </div>
       </div>
-      <div class="elementyListySideMenu">
+      <div
+        class="elementyListySideMenu"
+        [ngStyle]="{'width': menuState === 'open' ? '100%' : '',}"
+      >
         <span class="material-symbols-outlined ikonySM"> groups </span>
-        <p class="tekstSM">Użytkownicy</p>
+        <p
+          class="tekstSM"
+          [ngStyle]="{'display': menuState === 'open' ? 'block' : '',}"
+        >
+          Użytkownicy
+        </p>
       </div>
-      <div class="elementyListySideMenu">
+      <div
+        class="elementyListySideMenu"
+        [ngStyle]="{'width': menuState === 'open' ? '100%' : '',}"
+      >
         <span class="material-symbols-outlined ikonySM"> badge </span>
-        <p class="tekstSM">Pracownicy</p>
+        <p
+          class="tekstSM"
+          [ngStyle]="{'display': menuState === 'open' ? 'block' : '',}"
+        >
+          Pracownicy
+        </p>
       </div>
     </div>
     <div class="wylogowanie">
       <div class="linia">
         <hr />
       </div>
-      <div class="przyciskWyloguj">
+      <div
+        class="przyciskWyloguj"
+        [ngStyle]="{'padding': menuState === 'open' ? '0' : '',}"
+      >
         <span class="material-symbols-outlined ikonaWylogowanie"> logout </span>
-        <p class="wylogujTekst">WYLOGUJ</p>
+        <p
+          class="wylogujTekst"
+          [ngStyle]="{'display': menuState === 'open' ? 'block' : '',}"
+        >
+          WYLOGUJ
+        </p>
       </div>
     </div>
   </div>

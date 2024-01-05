@@ -1,12 +1,11 @@
-import { Component, OnInit, ChangeDetectorRef, Input } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { CommonModule, NgStyle } from '@angular/common';
 import { Title } from '@angular/platform-browser';
 import { Router, RouterOutlet } from '@angular/router';
 import { trigger, state, style, animate, transition, query, stagger } from '@angular/animations';
 
 import { CmsPodswietlenieSMService } from '../../services/cms-podswietlenie-sm/cms-podswietlenie-sm.service';
 import { MenuKontaComponent } from '../../components/menu-konta/menu-konta.component';
-import { HamburgerMenuIconComponent } from "../../components/hamburger-menu-icon/hamburger-menu-icon.component";
 
 @Component({
   selector: 'app-cms',
@@ -50,13 +49,24 @@ import { HamburgerMenuIconComponent } from "../../components/hamburger-menu-icon
       transition('closed <=> open', [
         animate('0.3s ease')
       ])
+    ]),
+    trigger('menuAnimation', [
+      state('closed', style({
+        transform: 'rotate(0deg)'
+      })),
+      state('open', style({
+        transform: 'rotate(-180deg)',
+      })),
+      transition('closed <=> open', animate('0.3s ease-in-out'))
     ])
   ],
-  imports: [CommonModule, MenuKontaComponent, RouterOutlet, HamburgerMenuIconComponent]
+  imports: [CommonModule, MenuKontaComponent, RouterOutlet]
 })
 export class CmsComponent implements OnInit {
+  menuState: string = 'closed';
 
-  constructor(private titleService: Title, private router: Router, protected podswietlenieSM: CmsPodswietlenieSMService, private cdRef: ChangeDetectorRef) {
+  constructor(private titleService: Title, private router: Router, protected podswietlenieSM: CmsPodswietlenieSMService, private cdRef: ChangeDetectorRef,
+    /*private ngStyle: NgStyle*/) {
     this.titleService.setTitle('CMS');
   }
 
@@ -73,5 +83,9 @@ export class CmsComponent implements OnInit {
   isMenuArtykulyOpen = false;
   toggleMenuArtykuly() {
     this.isMenuArtykulyOpen = !this.isMenuArtykulyOpen;
+  }
+
+  toggleMenu(): void {
+    this.menuState = (this.menuState === 'closed') ? 'open' : 'closed';
   }
 }
