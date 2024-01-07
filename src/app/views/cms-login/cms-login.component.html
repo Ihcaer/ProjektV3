@@ -7,14 +7,19 @@
           <label for="email" class="cmsLoginOznaczenie">E-mail</label
           ><input
             type="text"
-            id="email"
+            class="cmsLoginPole"
             name="email"
             (ngModel)="(user.email)"
           />
         </div>
         <div class="cmsHaslo">
           <label for="haslo" class="cmsLoginOznaczenie">Hasło</label>
-          <input type="text" id="haslo" name="haslo" (ngModel)="(user.haslo)" />
+          <input
+            type="password"
+            class="cmsLoginPole"
+            name="haslo"
+            (ngModel)="(user.haslo)"
+          />
         </div>
       </div>
     </form>
