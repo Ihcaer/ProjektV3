@@ -9,7 +9,7 @@
             type="text"
             class="cmsLoginPole"
             name="email"
-            (ngModel)="(user.email)"
+            [(ngModel)]="user.email"
           />
         </div>
         <div class="cmsHaslo">
@@ -18,9 +18,10 @@
             type="password"
             class="cmsLoginPole"
             name="haslo"
-            (ngModel)="(user.haslo)"
+            [(ngModel)]="user.haslo"
           />
         </div>
+        <button type="submit" class="cmsPrzyciskZaloguj">Zaloguj się</button>
       </div>
     </form>
   </div>

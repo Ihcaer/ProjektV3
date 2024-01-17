@@ -14,16 +14,18 @@
   border: 3px solid #d5d5d5;
   border-radius: 60px;
   gap: 25px;
-  padding: 2% 2% 2% 2%;
+  padding: 1.5% 1%;
 }
 .napisLogowanie {
   font-size: 36px;
   font-weight: 500;
+  cursor: default;
 }
 .cmsLogowanieFormularz {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  align-items: center;
+  gap: 20px;
 }
 .cmsEmail,
 .cmsHaslo {
@@ -39,5 +41,20 @@
   border: 1px solid #000000;
   border-radius: 60px;
   height: 42px;
-  width: 193px;
+  width: 230px;
+  font-size: 20px;
+  padding: 0 15px;
+}
+.cmsPrzyciskZaloguj {
+  border: 1px solid #000000;
+  border-radius: 60px;
+  height: 42px;
+  width: 150px;
+  font-size: 20px;
+  padding: 0 15px;
+  cursor: pointer;
+  transition: background-color 0.5s ease;
+}
+.cmsPrzyciskZaloguj:hover {
+  background-color: #cacaca;
 }
