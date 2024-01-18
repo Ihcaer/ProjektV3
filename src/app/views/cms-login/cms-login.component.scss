@@ -1,7 +1,7 @@
 .container {
   width: 100%;
   height: 100%;
-  background-color: #ffffff;
+  background-color: #f0eff4;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -11,7 +11,7 @@
   align-items: center;
   flex-direction: column;
   background-color: #33d185;
-  border: 3px solid #d5d5d5;
+  border: 3px solid #919191;
   border-radius: 60px;
   gap: 25px;
   padding: 1.5% 1%;
@@ -53,8 +53,11 @@
   font-size: 20px;
   padding: 0 15px;
   cursor: pointer;
-  transition: background-color 0.5s ease;
+  background-color: #5b5b5b;
+  color: #ffffff;
+  transition: background-color 0.5s ease, color 0.5s ease;
 }
 .cmsPrzyciskZaloguj:hover {
-  background-color: #cacaca;
+  background-color: #afe5ce;
+  color: #000000;
 }
