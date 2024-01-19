@@ -1,7 +1,7 @@
 .container {
   width: 100%;
   height: 100%;
-  background-color: #ffffff;
+  background-color: #f0eff4;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -11,10 +11,53 @@
   align-items: center;
   flex-direction: column;
   background-color: #33d185;
-  border: 3px solid #d5d5d5;
+  border: 3px solid #919191;
   border-radius: 60px;
+  gap: 25px;
+  padding: 1.5% 1%;
 }
 .napisLogowanie {
   font-size: 36px;
-  font-weight: 600;
+  font-weight: 500;
+  cursor: default;
+}
+.cmsLogowanieFormularz {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+.cmsEmail,
+.cmsHaslo {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.cmsLoginOznaczenie {
+  text-align: center;
+  font-size: 26px;
+}
+.cmsLoginPole {
+  border: 1px solid #000000;
+  border-radius: 60px;
+  height: 42px;
+  width: 230px;
+  font-size: 20px;
+  padding: 0 15px;
+}
+.cmsPrzyciskZaloguj {
+  border: 1px solid #000000;
+  border-radius: 60px;
+  height: 42px;
+  width: 150px;
+  font-size: 20px;
+  padding: 0 15px;
+  cursor: pointer;
+  background-color: #5b5b5b;
+  color: #ffffff;
+  transition: background-color 0.5s ease, color 0.5s ease;
+}
+.cmsPrzyciskZaloguj:hover {
+  background-color: #afe5ce;
+  color: #000000;
 }
