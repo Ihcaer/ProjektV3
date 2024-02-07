@@ -27,7 +27,7 @@
   align-items: center;
   gap: 20px;
 }
-.cmsEmail,
+.cmsLogin,
 .cmsHaslo {
   display: flex;
   flex-direction: column;
@@ -44,6 +44,10 @@
   width: 230px;
   font-size: 20px;
   padding: 0 15px;
+}
+.przełącznikNieWylogowuj {
+  display: flex;
+  align-items: center;
 }
 .cmsPrzyciskZaloguj {
   border: 1px solid #000000;

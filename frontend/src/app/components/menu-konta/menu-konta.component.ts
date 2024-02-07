@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { trigger, state, style, animate, transition } from '@angular/animations';
 import { MatDividerModule } from '@angular/material/divider';
 
+import { AuthCMSService } from '../../services/authCMS/auth-cms.service';
+
 @Component({
   selector: 'app-menu-konta',
   standalone: true,
@@ -23,7 +25,7 @@ import { MatDividerModule } from '@angular/material/divider';
   ]
 })
 export class MenuKontaComponent {
-  constructor(private router: Router) { }
+  constructor(private router: Router, private cmsAuthService: AuthCMSService) { }
 
   isMenuKontaOpen = false;
   toggleMenuKonta() {
@@ -32,5 +34,9 @@ export class MenuKontaComponent {
 
   przyciskUstawienia() {
     this.router.navigate(['/cms/ustawienia']);
+  }
+
+  wyloguj() {
+    this.cmsAuthService.logout();
   }
 }

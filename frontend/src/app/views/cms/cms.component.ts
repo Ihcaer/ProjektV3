@@ -4,8 +4,10 @@ import { Title } from '@angular/platform-browser';
 import { Router, RouterOutlet } from '@angular/router';
 import { trigger, state, style, animate, transition, query, stagger } from '@angular/animations';
 
-import { CmsPodswietlenieSMService } from '../../services/cms-podswietlenie-sm/cms-podswietlenie-sm.service';
 import { MenuKontaComponent } from '../../components/menu-konta/menu-konta.component';
+import { CmsPodswietlenieSMService } from '../../services/cms-podswietlenie-sm/cms-podswietlenie-sm.service';
+import { AuthCMSService } from '../../services/authCMS/auth-cms.service';
+
 
 @Component({
   selector: 'app-cms',
@@ -13,16 +15,6 @@ import { MenuKontaComponent } from '../../components/menu-konta/menu-konta.compo
   templateUrl: './cms.component.html',
   styleUrl: './cms.component.scss',
   animations: [
-    /*trigger('otwieranieMenu', [
-      transition(':enter', [
-        style({ opacity: 1, height: 0 }),
-        animate('0.3s ease', style({ opacity: 1, height: '*' }))
-      ]),
-      transition(':leave', [
-        style({ opacity: 1, height: '*' }),
-        animate('0.3s ease', style({ opacity: 1, height: 0 }))
-      ])
-    ]),*/
     trigger('otwieranieMenu', [
       transition('* => *', [
         query(':enter', [
@@ -65,17 +57,17 @@ import { MenuKontaComponent } from '../../components/menu-konta/menu-konta.compo
 export class CmsComponent implements OnInit {
   menuState: string = 'closed';
 
-  constructor(private titleService: Title, private router: Router, protected podswietlenieSM: CmsPodswietlenieSMService, private cdRef: ChangeDetectorRef,
-    /*private ngStyle: NgStyle*/) {
+  constructor(private titleService: Title, private router: Router, private cdRef: ChangeDetectorRef, protected podswietlenieSM: CmsPodswietlenieSMService, private cmsAuthService: AuthCMSService) {
     this.titleService.setTitle('CMS');
   }
 
   ngOnInit() {
     this.podswietlenieSM.activeAktywnosc = true;
     this.cdRef.detectChanges();
+    this.cmsAuthService.autoLogout();
   }
 
-  navigateToCMS() {
+  navigateToCmsAktualnosci() {
     this.router.navigate(['/cms']);
     this.podswietlenieSM.activeAktywnosc = true;
   }
@@ -87,5 +79,9 @@ export class CmsComponent implements OnInit {
 
   toggleMenu(): void {
     this.menuState = (this.menuState === 'closed') ? 'open' : 'closed';
+  }
+
+  wyloguj() {
+    this.cmsAuthService.logout();
   }
 }

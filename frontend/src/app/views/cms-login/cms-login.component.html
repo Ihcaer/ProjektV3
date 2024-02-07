@@ -1,15 +1,15 @@
 <div class="container">
   <div class="main">
     <div class="napisLogowanie">Logowanie</div>
-    <form (ngSubmit)="zaloguj()">
+    <form [formGroup]="logowanieCMS">
       <div class="cmsLogowanieFormularz">
-        <div class="cmsEmail">
-          <label for="email" class="cmsLoginOznaczenie">E-mail</label
+        <div class="cmsLogin">
+          <label for="login" class="cmsLoginOznaczenie">Login</label
           ><input
             type="text"
             class="cmsLoginPole"
-            name="email"
-            [(ngModel)]="user.email"
+            name="login"
+            formControlName="login"
           />
         </div>
         <div class="cmsHaslo">
@@ -18,10 +18,21 @@
             type="password"
             class="cmsLoginPole"
             name="haslo"
-            [(ngModel)]="user.haslo"
+            formControlName="haslo"
           />
         </div>
-        <button type="submit" class="cmsPrzyciskZaloguj">Zaloguj się</button>
+        <div class="przełącznikNieWylogowuj">
+          <label for="nieWylogowuj">Nie wylogowuj mnie</label>
+          <!-- Dodać komunikat po najechaniu, że po 30 dniach nastąpi wylogowanie -->
+          <input
+            type="checkbox"
+            name="nieWylogowuj"
+            formControlName="nieWylogowuj"
+          />
+        </div>
+        <button class="cmsPrzyciskZaloguj" (click)="zaloguj()">
+          Zaloguj się
+        </button>
       </div>
     </form>
   </div>
