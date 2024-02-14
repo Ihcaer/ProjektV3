@@ -21,14 +21,15 @@
             formControlName="haslo"
           />
         </div>
-        <div class="przełącznikNieWylogowuj">
-          <label for="nieWylogowuj">Nie wylogowuj mnie</label>
+        <div class="przełącznikZapamietaj">
           <!-- Dodać komunikat po najechaniu, że po 30 dniach nastąpi wylogowanie -->
           <input
             type="checkbox"
-            name="nieWylogowuj"
+            name="zapamietajMnie"
+            id="zapamietajMnie"
+            class="zapamietaj"
             formControlName="nieWylogowuj"
-          />
+          /><label for="zapamietajMnie">Zapamiętaj mnie</label>
         </div>
         <button class="cmsPrzyciskZaloguj" (click)="zaloguj()">
           Zaloguj się

@@ -1,8 +1,9 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
-import { CommonModule, NgStyle } from '@angular/common';
+import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { Title } from '@angular/platform-browser';
 import { Router, RouterOutlet } from '@angular/router';
 import { trigger, state, style, animate, transition, query, stagger } from '@angular/animations';
+import { Subscription } from 'rxjs';
 
 import { MenuKontaComponent } from '../../components/menu-konta/menu-konta.component';
 import { CmsPodswietlenieSMService } from '../../services/cms-podswietlenie-sm/cms-podswietlenie-sm.service';
@@ -54,8 +55,10 @@ import { AuthCMSService } from '../../services/authCMS/auth-cms.service';
   ],
   imports: [CommonModule, MenuKontaComponent, RouterOutlet]
 })
-export class CmsComponent implements OnInit {
+export class CmsComponent implements OnInit, OnDestroy {
   menuState: string = 'closed';
+  isLoggedIn: boolean = false;
+  authSub: Subscription = new Subscription();
 
   constructor(private titleService: Title, private router: Router, private cdRef: ChangeDetectorRef, protected podswietlenieSM: CmsPodswietlenieSMService, private cmsAuthService: AuthCMSService) {
     this.titleService.setTitle('CMS');
@@ -64,7 +67,16 @@ export class CmsComponent implements OnInit {
   ngOnInit() {
     this.podswietlenieSM.activeAktywnosc = true;
     this.cdRef.detectChanges();
-    this.cmsAuthService.autoLogout();
+
+    this.authSub = this.cmsAuthService.isEmployeeLoggedIn().subscribe((isLoggedIn) => {
+      this.isLoggedIn = isLoggedIn;
+      if (!isLoggedIn) {
+        this.wyloguj();
+      }
+    });
+  }
+  ngOnDestroy(): void {
+    this.authSub.unsubscribe();
   }
 
   navigateToCmsAktualnosci() {

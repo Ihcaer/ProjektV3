@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { MatIconModule } from '@angular/material/icon'
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthCMSService } from '../../services/authCMS/auth-cms.service';
@@ -7,7 +8,7 @@ import { AuthCMSService } from '../../services/authCMS/auth-cms.service';
 @Component({
   selector: 'app-cms-login',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, MatIconModule, ReactiveFormsModule],
   templateUrl: './cms-login.component.html',
   styleUrl: './cms-login.component.scss'
 })
