@@ -80,18 +80,6 @@ $wielkoscCheckboxZapamietaj: 15px;
         border-radius: 30%;
         background-color: #fff;
       }
-      /*&::after {
-        content: "\2714";
-        position: absolute;
-        left: 3px;
-        top: 50%;
-        transform: translateY(-50%);
-        font-size: 14px;
-        color: transparent;
-      }*/
-      /*&:hover::before {
-        border-color: #666;
-      }*/
     }
     &:checked + label::before {
       background-image: url("../../../assets/icons/check_sprite.png");
@@ -100,9 +88,6 @@ $wielkoscCheckboxZapamietaj: 15px;
       background-size: 18px;
       background-color: #afe5ce;
     }
-    /*&:checked + label::after {
-      color: #5b5b5b;
-    }*/
   }
 }
 .cmsPrzyciskZaloguj {

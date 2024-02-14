@@ -22,7 +22,7 @@ exports.loginCMS = async (req, res) => {
       return res.status(401).json({ message: 'Login lub hasło nieprawidłowe' });
     }
 
-    const expiresIn = nieWylogowuj ? '30d' : '2m';
+    const expiresIn = nieWylogowuj ? '30d' : '5h';
     const accessToken = jwt.sign(
       { employeeId: employee.id },
       config.jwtSecret,
