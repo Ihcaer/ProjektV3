@@ -21,8 +21,12 @@
             formControlName="haslo"
           />
         </div>
-        <div class="przełącznikZapamietaj">
-          <!-- Dodać komunikat po najechaniu, że po 30 dniach nastąpi wylogowanie -->
+        <div
+          class="przełącznikZapamietaj"
+          mat-raised-button
+          matTooltipPosition="above"
+          matTooltip="Po zaznaczeniu wylogowanie nastąpi za 30 dni."
+        >
           <input
             type="checkbox"
             name="zapamietajMnie"
