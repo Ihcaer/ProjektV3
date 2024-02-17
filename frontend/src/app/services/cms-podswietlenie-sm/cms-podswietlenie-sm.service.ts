@@ -5,6 +5,7 @@ import { Injectable } from '@angular/core';
 })
 export class CmsPodswietlenieSMService {
   activeAktywnosc: boolean = false;
+  activePracownicy: boolean = false;
 
   constructor() { }
 }

@@ -15,7 +15,7 @@ export class CmsPustyComponent implements OnInit {
     const currentPath = this.router.url;
 
     if (currentPath === '/cms') {
-      this.router.navigate(['/cms', 'aktualnosci']);
+      this.router.navigate(['/cms/logged/aktualnosci']);
     }
   }
 }

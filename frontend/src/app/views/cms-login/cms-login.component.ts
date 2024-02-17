@@ -29,7 +29,7 @@ export class CmsLoginComponent implements OnInit {
   ngOnInit() {
     this.CMSAuthService.isEmployeeLoggedIn().subscribe(isLoggedIn => {
       if (isLoggedIn) {
-        this.router.navigate(['/cms/aktualnosci']);
+        this.router.navigate(['/cms/logged/aktualnosci']);
       }
     });
   }

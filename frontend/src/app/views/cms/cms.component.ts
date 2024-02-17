@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Title } from '@angular/platform-browser';
-import { Router, RouterOutlet } from '@angular/router';
+import { Router, RouterOutlet, IsActiveMatchOptions } from '@angular/router';
 import { trigger, state, style, animate, transition, query, stagger } from '@angular/animations';
 import { Subscription } from 'rxjs';
 
@@ -60,14 +60,11 @@ export class CmsComponent implements OnInit, OnDestroy {
   isLoggedIn: boolean = false;
   authSub: Subscription = new Subscription();
 
-  constructor(private titleService: Title, private router: Router, private cdRef: ChangeDetectorRef, protected podswietlenieSM: CmsPodswietlenieSMService, private cmsAuthService: AuthCMSService) {
+  constructor(private cdRef: ChangeDetectorRef, private titleService: Title, private router: Router, protected podswietlenieSM: CmsPodswietlenieSMService, private cmsAuthService: AuthCMSService) {
     this.titleService.setTitle('CMS');
   }
 
   ngOnInit() {
-    this.podswietlenieSM.activeAktywnosc = true;
-    this.cdRef.detectChanges();
-
     this.authSub = this.cmsAuthService.isEmployeeLoggedIn().subscribe((isLoggedIn) => {
       this.isLoggedIn = isLoggedIn;
       if (!isLoggedIn) {
@@ -79,9 +76,22 @@ export class CmsComponent implements OnInit, OnDestroy {
     this.authSub.unsubscribe();
   }
 
-  navigateToCmsAktualnosci() {
-    this.router.navigate(['/cms']);
-    this.podswietlenieSM.activeAktywnosc = true;
+  isPathActive(path: string): boolean {
+    return this.router.isActive(path, {
+      paths: 'exact',
+      queryParams: 'ignored',
+      matrixParams: 'ignored',
+      fragment: 'ignored'
+    });
+  }
+
+  navigateToCmsAktualnosci(kategoria: string) {
+    if (kategoria === 'a') {
+      this.router.navigate(['/cms/logged/aktualnosci']);
+      //this.podswietlenieSM.activeAktywnosc = true;
+    } else if (kategoria === 'p') {
+      this.router.navigate(['cms/logged/pracownicy']);
+    }
   }
 
   isMenuArtykulyOpen = false;

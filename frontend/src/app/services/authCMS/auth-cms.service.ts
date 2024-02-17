@@ -98,7 +98,7 @@ export class AuthCMSService {
         tap(response => {
           if (response && response.accessToken) {
             this.setAccessToken(response.accessToken, nieWylogowuj);
-            this.router.navigate(['/cms/aktualnosci']);
+            this.router.navigate(['/cms/logged/aktualnosci']);
           }
         })
       );

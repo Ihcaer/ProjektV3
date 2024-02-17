@@ -1,9 +1,9 @@
-import { CanActivateFn, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
+import { CanActivateFn, CanActivateChildFn, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
 import { inject } from '@angular/core';
 import { map } from 'rxjs';
 import { AuthCMSService } from '../../services/authCMS/auth-cms.service';
 
-export const cmsAuthGuard: CanActivateFn = (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) => {
+export const cmsAuthGuard: CanActivateChildFn = (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) => {
   const cmsAuthService: AuthCMSService = inject(AuthCMSService);
   const router: Router = inject(Router);
 
