@@ -1,21 +1,24 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon'
+import { MatTooltipModule } from '@angular/material/tooltip'
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthCMSService } from '../../services/authCMS/auth-cms.service';
+import { BladLogowaniaSnackbarComponent } from '../../components/blad-logowania-snackbar/blad-logowania-snackbar.component';
 
 @Component({
   selector: 'app-cms-login',
   standalone: true,
-  imports: [CommonModule, MatIconModule, ReactiveFormsModule],
+  imports: [CommonModule, MatIconModule, MatTooltipModule, ReactiveFormsModule],
   templateUrl: './cms-login.component.html',
   styleUrl: './cms-login.component.scss'
 })
 export class CmsLoginComponent implements OnInit {
   logowanieCMS: FormGroup;
 
-  constructor(private lc: FormBuilder, private router: Router, private CMSAuthService: AuthCMSService) {
+  constructor(private lc: FormBuilder, private router: Router, private snackbar: MatSnackBar, private CMSAuthService: AuthCMSService) {
     this.logowanieCMS = this.lc.group({
       login: ['', [Validators.required]],
       haslo: ['', [Validators.required]],
@@ -29,9 +32,6 @@ export class CmsLoginComponent implements OnInit {
         this.router.navigate(['/cms/aktualnosci']);
       }
     });
-    /*if (this.logowanieCMS.invalid) {
-      return;
-    };*/
   }
 
   zaloguj() {
@@ -41,18 +41,23 @@ export class CmsLoginComponent implements OnInit {
       this.CMSAuthService.loginCMS(credentials, nieWylogowuj)
         .subscribe(response => {
           this.CMSAuthService.setAccessToken(response.accessToken, nieWylogowuj);
-          console.log("Zalogowano pomyślnie");
+          //console.log("Zalogowano pomyślnie");
         }, error => {
-          if (error.status === 404) {
-            console.log('Login nie istnieje.');
-          } else if (error.status === 401) {
-            console.log('Nieprawidłowe hasło.');
+          if (error.status === 404 || error.status === 401) {
+            this.openSnackbar(0);
           } else {
-            console.error('Błąd podczas logowania:', error);
+            //console.error('Błąd podczas logowania:', error);
           }
         });
     } else {
-      console.log("Formularz nie może być pusty");
+      this.openSnackbar(1);
     }
+  }
+
+  openSnackbar(index: number) {
+    this.snackbar.openFromComponent(BladLogowaniaSnackbarComponent, {
+      data: { messageIndex: index },
+      duration: 5000
+    });
   }
 }
