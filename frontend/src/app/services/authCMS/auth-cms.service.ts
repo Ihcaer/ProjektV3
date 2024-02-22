@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, BehaviorSubject, of } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { Router } from '@angular/router';
@@ -8,10 +8,14 @@ import { Router } from '@angular/router';
   providedIn: 'root'
 })
 export class AuthCMSService {
+  private baseUrl = 'http://localhost:3000';
+  private cmsLoginUrl = '/cms/login';
+  private cmsCreatingEmployeeUrl = '/cms/creatingEmployee';
+  private checkCodeUniqUrl = '/cms/checkCodeUniq';
+  private generateUniqueCodeUrl = '/cms/generateUniqueCode'
+  private cmsRegisterUrl = '/cms/register';
+
   private accessTokenSubject: BehaviorSubject<string | null>;
-  baseUrl = 'http://localhost:3000';
-  cmsLoginUrl = '/cms/login';
-  cmsRegisterUrl = '/cms/register';
 
   constructor(private http: HttpClient, private router: Router) {
     this.accessTokenSubject = new BehaviorSubject<string | null>(this.getStoredAccessToken());
@@ -66,7 +70,6 @@ export class AuthCMSService {
       }
     });
   }
-
   private parseExpirationTime(expiresIn: string): number {
     const units: { [key: string]: number } = {
       'ms': 1,
@@ -88,7 +91,18 @@ export class AuthCMSService {
     return of(!!token);
   }
 
-  registerCMS(credentials: { imie: string, login: string, uprawnienia: number, password: string }): Observable<any> {
+  // wywoływane
+  creatingEmployee(credentials: { imie: string, nazwisko: string, uprawnienia: number, kodWeryfikacyjny: number }): Observable<any> {
+    return this.http.post<any>(`${this.baseUrl}${this.cmsCreatingEmployeeUrl}`, credentials);
+  }
+  checkCodeUniq(kodWeryfikacyjny: number): Observable<boolean> {
+    return this.http.get<boolean>(`${this.baseUrl}${this.checkCodeUniqUrl}/${kodWeryfikacyjny}`);
+  }
+  generateUniqueCode(): Observable<number> {
+    return this.http.get<number>(`${this.baseUrl}${this.generateUniqueCodeUrl}`);
+  }
+
+  registerCMS(credentials: { login: string, password: string }): Observable<any> {
     return this.http.post<any>(`${this.baseUrl}${this.cmsRegisterUrl}`, credentials);
   }
 

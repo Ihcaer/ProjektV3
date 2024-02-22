@@ -1,0 +1,12 @@
+<h1 mat-dialog-title>Kod Weryfikacyjny:</h1>
+<div mat-dialog-content>
+  <p>{{ data.kodWeryfikacyjny }}</p>
+  <span
+    class="kopiujPrzycisk"
+    (click)="copyVerCode(data.kodWeryfikacyjny.toString())"
+    matTooltip="Kopiuj"
+  >
+    <mat-icon>content_copy</mat-icon>
+  </span>
+</div>
+<button class="przyciskZamknij" (click)="closeDialog()">Zamknij</button>

@@ -1,0 +1,58 @@
+<div class="container">
+  <form [formGroup]="creatingEmployee">
+    <label for="imie">Imię:</label>
+    <input type="text" id="imie" formControlName="imie" required />
+
+    <label for="nazwisko">Nazwisko:</label>
+    <input type="text" id="nazwisko" formControlName="nazwisko" />
+
+    <input
+      type="checkbox"
+      id="pisanieArtykułów"
+      formControlName="checkboxMojeArtykuly"
+    />
+    <label for="pisanieArtykułów"
+      >Pisanie artykułów/edycja/usuwanie swoich artykułów</label
+    >
+    <input
+      type="checkbox"
+      id="przegladArtykulow"
+      formControlName="checkboxWszystkieArtykuly"
+    />
+    <label for="przegladArtykulow"
+      >Przegląd/wysyłanie/edycja/usuwanie wszystkich artykułów</label
+    >
+    <input
+      type="checkbox"
+      id="ofertyFranczyz"
+      formControlName="checkboxOfertyFranczyz"
+    />
+    <label for="ofertyFranczyz">Dodawanie/edycja/usuwanie ofert franczyz</label>
+    <input
+      type="checkbox"
+      id="zarzadzanieUzytkownikami"
+      formControlName="checkboxUzytkownicy"
+    />
+    <label for="zarzadzanieUzytkownikami"
+      >Dodawanie/edycja/usuwanie użytkowników</label
+    >
+    <input
+      type="checkbox"
+      id="zarzadzaniePrzedstawicielami"
+      formControlName="checkboxPrzedstawiciele"
+    />
+    <label for="zarzadzaniePrzedstawicielami"
+      >Dodawanie/edycja/usuwanie przedstawicieli</label
+    >
+    <input
+      type="checkbox"
+      id="zarządzaniePracownikami"
+      formControlName="checkboxPracownicy"
+    />
+    <label for="zarządzaniePracownikami"
+      >Dodawanie/edycja/usuwanie pracowników</label
+    >
+
+    <button type="submit" (click)="dodajPracownika()">Dodaj</button>
+  </form>
+</div>

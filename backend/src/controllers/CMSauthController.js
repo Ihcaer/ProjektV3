@@ -22,7 +22,7 @@ exports.loginCMS = async (req, res) => {
       return res.status(401).json({ message: 'Login lub hasło nieprawidłowe' });
     }
 
-    const expiresIn = nieWylogowuj ? '30d' : '5h';
+    const expiresIn = nieWylogowuj ? '30d' : '7h';
     const accessToken = jwt.sign(
       { employeeId: employee.id },
       config.jwtSecret,
@@ -36,8 +36,18 @@ exports.loginCMS = async (req, res) => {
   }
 };
 
+exports.creatingEmployee = async (req, res) => {
+  const credentials = req.body;
+  try {
+    const employee = await Employee.create(credentials);
+    res.status(200).send({ message: 'Pracownik zarejestrowany pomyślnie' });
+  } catch (error) {
+    res.status(500).send('Błąd serwera');
+  }
+};
+
 exports.registerCMS = async (req, res) => {
-  const { imie, uprawnienia, login, haslo } = req.body;
+  const { login, haslo } = req.body;
 
   try {
     const existingUser = await Employee.findOne({ where: { login } });
@@ -48,8 +58,6 @@ exports.registerCMS = async (req, res) => {
 
     const hashedPassword = await bcryptUtils.hashPassword(haslo);
     const newEmployee = await Employee.create({
-      imie,
-      uprawnienia,
       login,
       haslo: hashedPassword,
     });
@@ -58,5 +66,23 @@ exports.registerCMS = async (req, res) => {
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: 'Błąd serwera' });
+  }
+};
+
+exports.generateUniqueCode = async (req, res) => {
+  const kodWeryfikacyjny = Math.floor(10000 + Math.random() * 90000);
+  res.status(200).send(kodWeryfikacyjny.toString());
+};
+
+exports.checkVerCode = async (req, res) => {
+  const verCode = req.params.verCode;
+  try {
+    const employee = await Employee.findOne({
+      where: { kodWeryfikacyjny: verCode },
+    });
+    const isUnique = !employee;
+    res.status(200).send(isUnique);
+  } catch (error) {
+    res.status(500).send('Błąd serwera');
   }
 };

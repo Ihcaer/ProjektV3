@@ -16,18 +16,4 @@ module.exports = (req, res, next) => {
     req.employee = decoded;
     next();
   });
-
-  /*try {
-    const decoded = jwt.verify(token, config.jwtSecret);
-    if (decoded.exp <= Date.now() / 1000) {
-      return res
-        .status(401)
-        .json({ message: 'Token wygasł. Zaloguj się ponownie' });
-    }
-    req.user = decoded;
-    next();
-  } catch (error) {
-    console.error(error);
-    res.status(401).json({ message: 'Nieprawidłowy token.' });
-  }*/
 };

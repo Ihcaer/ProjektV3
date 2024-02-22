@@ -1,20 +1,9 @@
 <div class="container">
   <form [formGroup]="registerCMS">
-    <label for="imie">Imię:</label>
-    <input type="text" id="imie" formControlName="imie" required />
-
-    <label for="uprawnienia">Uprawnienia:</label>
-    <input
-      type="number"
-      id="uprawnienia"
-      formControlName="uprawnienia"
-      required
-    />
-
     <label for="login">Login:</label>
     <input type="text" id="login" formControlName="login" required />
 
-    <label for="password">Password:</label>
+    <label for="password">Hasło:</label>
     <input type="password" id="haslo" formControlName="haslo" required />
 
     <button

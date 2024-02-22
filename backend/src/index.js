@@ -2,9 +2,9 @@ const express = require('express');
 const cors = require('cors');
 require('dotenv').config();
 const bodyParser = require('body-parser');
-const authRoutes = require('./routes/authRoutes');
 const sequelize = require('./config/database');
-require('dotenv').config();
+const authRoutes = require('./routes/authRoutes');
+const employeesTableRoutes = require('./routes/employeesTableRoutes');
 
 const app = express();
 const port = process.env.PORT;
@@ -12,6 +12,7 @@ const port = process.env.PORT;
 app.use(cors());
 app.use(bodyParser.json());
 app.use('/cms', authRoutes);
+app.use('/cms', employeesTableRoutes);
 
 sequelize.sync().then(() => {
   app.listen(port, () => {

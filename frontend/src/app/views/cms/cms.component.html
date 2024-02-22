@@ -38,7 +38,7 @@
         (click)="navigateToCmsAktualnosci('a')"
         [ngStyle]="{'width': menuState === 'open' ? '93%' : '',}"
         [ngClass]="{
-          podswietlenieAktywSM: isPathActive('/cms/logged/aktualnosci')
+          podswietlenieAktywSM: isPathActive('cms/logged/aktualnosci')
         }"
       >
         <span class="material-symbols-outlined ikonySM"> history </span>
@@ -143,7 +143,9 @@
         (click)="navigateToCmsAktualnosci('p')"
         [ngStyle]="{'width': menuState === 'open' ? '100%' : '',}"
         [ngClass]="{
-          podswietlenieAktywSM: isPathActive('cms/logged/pracownicy')
+          podswietlenieAktywSM:
+            isPathActive('cms/logged/pracownicy') ||
+            isPathActive('cms/logged/employeeRegister')
         }"
       >
         <span class="material-symbols-outlined ikonySM"> badge </span>

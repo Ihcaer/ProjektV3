@@ -1,1 +1,39 @@
-<p>pracownicy works!</p>
+<div class="container">
+  <div class="przyciskDodajPracownika">
+    <button (click)="navigateToEmployeeRegister()">Dodaj pracownika</button>
+  </div>
+  <div class="tabela">
+    <table>
+      <tr class="naglowek">
+        <th>Imię</th>
+        <th>Nazwisko</th>
+        <th>Uprawnienia</th>
+        <th>Ostatnie logowanie</th>
+        <th>Akcje</th>
+      </tr>
+      <tr class="dane" *ngFor="let pracownik of employees">
+        <td>{{ pracownik.imie }}</td>
+        <td>{{ pracownik.nazwisko }}</td>
+        <td>{{ pracownik.uprawnienia }}</td>
+        <td class="ikonyAkcje">
+          <mat-icon
+            class="ikonaEdycjaPracownika"
+            (click)="navigateToEmployeeSettings(pracownik.id)"
+            mat-raised-button
+            matTooltipPosition="above"
+            matTooltip="Edytuj dane pracownika"
+            >manage_accounts</mat-icon
+          >
+          <mat-icon
+            class="ikonaUsunieciePracowika"
+            (click)="deleteEmployee(pracownik.id)"
+            mat-raised-button
+            matTooltipPosition="above"
+            matTooltip="Usuń pracownika"
+            >person_remove</mat-icon
+          >
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>

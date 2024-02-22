@@ -29,7 +29,7 @@ const Employee = sequelize.define('employee', {
     type: DataTypes.TEXT,
   },
   kodWeryfikacyjny: {
-    type: DataTypes.STRING,
+    type: DataTypes.INTEGER,
   },
 });
 

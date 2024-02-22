@@ -25,6 +25,8 @@ import { AuthCMSService } from '../../services/authCMS/auth-cms.service';
   ]
 })
 export class MenuKontaComponent {
+  employee: any;
+
   constructor(private router: Router, private cmsAuthService: AuthCMSService) { }
 
   isMenuKontaOpen = false;
