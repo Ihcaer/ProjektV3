@@ -102,7 +102,7 @@ export class AuthCMSService {
     return this.http.get<number>(`${this.baseUrl}${this.generateUniqueCodeUrl}`);
   }
 
-  registerCMS(credentials: { login: string, password: string }): Observable<any> {
+  registerCMS(credentials: { login: string, haslo: string, kodWeryfikacyjny: string }): Observable<any> {
     return this.http.post<any>(`${this.baseUrl}${this.cmsRegisterUrl}`, credentials);
   }
 

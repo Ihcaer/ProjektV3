@@ -38,3 +38,21 @@ exports.deleteEmployee = async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 };
+
+exports.checkVerCode = async (req, res) => {
+  const verCode = req.body.verCode;
+  try {
+    const result = await Employee.findOne({
+      where: { kodWeryfikacyjny: verCode },
+      attributes: ['kodWeryfikacyjny'],
+    });
+    if (result) {
+      res.json({ exists: true });
+    } else {
+      res.json({ exists: false });
+    }
+  } catch (error) {
+    console.log('Error: ', error);
+    res.status(500).json({ error: 'Błąd serwera' });
+  }
+};

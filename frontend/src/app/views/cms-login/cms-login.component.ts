@@ -4,14 +4,14 @@ import { MatIconModule } from '@angular/material/icon'
 import { MatTooltipModule } from '@angular/material/tooltip'
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { AuthCMSService } from '../../services/authCMS/auth-cms.service';
 import { BladLogowaniaSnackbarComponent } from '../../components/blad-logowania-snackbar/blad-logowania-snackbar.component';
 
 @Component({
   selector: 'app-cms-login',
   standalone: true,
-  imports: [CommonModule, MatIconModule, MatTooltipModule, ReactiveFormsModule],
+  imports: [CommonModule, MatIconModule, MatTooltipModule, ReactiveFormsModule, RouterLink],
   templateUrl: './cms-login.component.html',
   styleUrl: './cms-login.component.scss'
 })

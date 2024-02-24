@@ -10,6 +10,7 @@ export class EmployeesTableService {
   private employeesTableUrl = '/cms/employeesTable';
   private employeeDataUrl = '/cms/employeeData';
   private deleteEmployeeUrl = '/cms/deleteEmployee';
+  private checkVerCodeUrl = '/cms/checkVerCode'
 
   constructor(private http: HttpClient) { }
 
@@ -23,5 +24,9 @@ export class EmployeesTableService {
 
   deleteEmployee(id: number): Observable<any> {
     return this.http.delete(this.baseUrl + this.deleteEmployeeUrl + '/' + id);
+  }
+
+  checkVerCode(verCode: string) {
+    return this.http.post<any>(this.baseUrl + this.checkVerCodeUrl, { verCode });
   }
 }

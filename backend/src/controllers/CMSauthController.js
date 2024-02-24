@@ -47,7 +47,7 @@ exports.creatingEmployee = async (req, res) => {
 };
 
 exports.registerCMS = async (req, res) => {
-  const { login, haslo } = req.body;
+  /*const { login, haslo } = req.body;
 
   try {
     const existingUser = await Employee.findOne({ where: { login } });
@@ -66,6 +66,26 @@ exports.registerCMS = async (req, res) => {
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: 'Błąd serwera' });
+  }*/
+  const { login, haslo, kodWeryfikacyjny } = req.body;
+
+  try {
+    const existingEmployee = await Employee.findOne({ where: { login } });
+    if (existingEmployee) {
+      return res.status(400).json({ message: 'Ten login jest zajęty' });
+    }
+
+    const hashedPassword = await bcryptUtils.hashPassword(haslo);
+    const authEmployee = await Employee.update(
+      {
+        login: login,
+        haslo: hashedPassword,
+        kodWeryfikacyjny: null,
+      },
+      { where: { kodWeryfikacyjny: kodWeryfikacyjny } }
+    );
+  } catch (error) {
+    console.error('Błąd podczas rejestracji: ', error);
   }
 };
 
