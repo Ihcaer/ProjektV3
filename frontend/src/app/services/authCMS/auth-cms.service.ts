@@ -9,11 +9,12 @@ import { Router } from '@angular/router';
 })
 export class AuthCMSService {
   private baseUrl = 'http://localhost:3000';
-  private cmsLoginUrl = '/cms/login';
-  private cmsCreatingEmployeeUrl = '/cms/creatingEmployee';
   private checkCodeUniqUrl = '/cms/checkCodeUniq';
   private generateUniqueCodeUrl = '/cms/generateUniqueCode'
   private cmsRegisterUrl = '/cms/register';
+  private cmsCreatingEmployeeUrl = '/cms/creatingEmployee';
+  private cmsLoginUrl = '/cms/login';
+  private permissionUrl = '/cms/permission';
 
   private accessTokenSubject: BehaviorSubject<string | null>;
 
@@ -91,6 +92,10 @@ export class AuthCMSService {
     return of(!!token);
   }
 
+  getPermission() {
+    return this.http.get<any>(this.baseUrl + this.permissionUrl);
+  }
+
   // wywoływane
   creatingEmployee(credentials: { imie: string, nazwisko: string, uprawnienia: number, kodWeryfikacyjny: number }): Observable<any> {
     return this.http.post<any>(`${this.baseUrl}${this.cmsCreatingEmployeeUrl}`, credentials);
@@ -107,7 +112,7 @@ export class AuthCMSService {
   }
 
   loginCMS(credentials: { login: string; haslo: string }, nieWylogowuj: boolean): Observable<any> {
-    return this.http.post<any>(`${this.baseUrl}${this.cmsLoginUrl}`, credentials)
+    return this.http.post<any>(`${this.baseUrl}${this.cmsLoginUrl}`, credentials, { withCredentials: true })
       .pipe(
         tap(response => {
           if (response && response.accessToken) {

@@ -9,10 +9,12 @@ const employeesTableRoutes = require('./routes/employeesTableRoutes');
 const app = express();
 const port = process.env.PORT;
 
-app.use(cors());
+app.use(cors({ origin: 'http://localhost:4200', credentials: true }));
 app.use(bodyParser.json());
 app.use('/cms', authRoutes);
 app.use('/cms', employeesTableRoutes);
+
+//app.options('/cms/login', cors());
 
 sequelize.sync().then(() => {
   app.listen(port, () => {

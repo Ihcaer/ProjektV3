@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 const { Employee } = require('../models');
 const config = require('../config/config');
 
-exports.loginCMS = async (req, res) => {
+/*exports.loginCMS = async (req, res) => {
   const { login, haslo, nieWylogowuj } = req.body;
 
   try {
@@ -28,6 +28,50 @@ exports.loginCMS = async (req, res) => {
       config.jwtSecret,
       { expiresIn }
     );
+
+    res.json({ accessToken });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Błąd serwera' });
+  }
+};*/
+exports.loginCMS = async (req, res) => {
+  const { login, haslo, nieWylogowuj } = req.body;
+
+  try {
+    const employee = await Employee.findOne({
+      where: { login },
+      attributes: ['id', 'login', 'haslo'],
+    });
+
+    if (!employee) {
+      return res.status(404).json({ message: 'Login lub hasło nieprawidłowe' });
+    }
+
+    const passwordMatch = await bcryptUtils.comparePassword(
+      haslo,
+      employee.haslo
+    );
+
+    if (!passwordMatch) {
+      return res.status(401).json({ message: 'Login lub hasło nieprawidłowe' });
+    }
+
+    const expiresIn = nieWylogowuj
+      ? 30 * 24 * 60 * 60 * 1000
+      : 7 * 60 * 60 * 1000;
+    const accessToken = jwt.sign(
+      { employeeId: employee.id },
+      config.jwtSecret,
+      { expiresIn }
+    );
+
+    res.cookie('accessToken', accessToken, {
+      httpOnly: true,
+      maxAge: expiresIn,
+      sameSite: 'strict',
+      secure: false, //https
+    });
 
     res.json({ accessToken });
   } catch (error) {
