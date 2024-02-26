@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Title } from '@angular/platform-browser';
-import { Router, RouterOutlet, IsActiveMatchOptions } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
 import { trigger, state, style, animate, transition, query, stagger } from '@angular/animations';
 import { Subscription } from 'rxjs';
 
@@ -59,6 +59,12 @@ export class CmsComponent implements OnInit, OnDestroy {
   menuState: string = 'closed';
   isLoggedIn: boolean = false;
   authSub: Subscription = new Subscription();
+  hasPermission1: boolean = false;
+  hasPermission2: boolean = false;
+  hasPermission3: boolean = false;
+  hasPermission4: boolean = false;
+  hasPermission5: boolean = false;
+  hasPermission6: boolean = false;
 
   constructor(private cdRef: ChangeDetectorRef, private titleService: Title, private router: Router, protected podswietlenieSM: CmsPodswietlenieSMService, private cmsAuthService: AuthCMSService) {
     this.titleService.setTitle('CMS');
@@ -70,6 +76,23 @@ export class CmsComponent implements OnInit, OnDestroy {
       if (!isLoggedIn) {
         this.wyloguj();
       }
+    });
+    this.cmsAuthService.getPermission().subscribe(permissionObject => {
+      const permissionNumber = permissionObject.permissionNumber;
+
+      const uprawnienia1 = [1, 3, 5, 7, 16, 18, 20, 31, 35, 46, 61, 65, 66, 76, 91, 112];
+      const uprawnienia2 = [2, 3, 6, 7, 17, 18, 21, 32, 33, 36, 47, 62, 63, 66, 77, 92, 112];
+      const uprawnienia3 = [5, 6, 7, 19, 20, 21, 34, 35, 36, 49, 64, 65, 66, 79, 94, 112];
+      const uprawnienia4 = [16, 17, 18, 19, 20, 21, 45, 46, 47, 49, 75, 76, 77, 79, 105, 112];
+      const uprawnienia5 = [31, 32, 33, 34, 35, 36, 45, 46, 47, 49, 90, 91, 92, 94, 105, 112];
+      const uprawnienia6 = [61, 62, 63, 64, 65, 66, 75, 76, 77, 79, 90, 91, 92, 94, 105, 112];
+
+      this.hasPermission1 = uprawnienia1.includes(permissionNumber);
+      this.hasPermission2 = uprawnienia2.includes(permissionNumber);
+      this.hasPermission3 = uprawnienia3.includes(permissionNumber);
+      this.hasPermission4 = uprawnienia4.includes(permissionNumber);
+      this.hasPermission5 = uprawnienia5.includes(permissionNumber);
+      this.hasPermission6 = uprawnienia6.includes(permissionNumber);
     });
   }
   ngOnDestroy(): void {
@@ -105,5 +128,6 @@ export class CmsComponent implements OnInit, OnDestroy {
 
   wyloguj() {
     this.cmsAuthService.logout();
+    this.isLoggedIn = false;
   }
 }

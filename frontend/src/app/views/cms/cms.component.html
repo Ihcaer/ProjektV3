@@ -139,6 +139,7 @@
         </p>
       </div>
       <div
+        *ngIf="hasPermission6"
         class="elementyListySideMenu"
         (click)="navigateToCmsAktualnosci('p')"
         [ngStyle]="{'width': menuState === 'open' ? '100%' : '',}"

@@ -3,6 +3,34 @@ const jwt = require('jsonwebtoken');
 const { Employee } = require('../models');
 const config = require('../config/config');
 
+exports.checkPermission = async (req, res) => {
+  try {
+    const token = req.cookies.accessToken;
+
+    if (!token) {
+      return res
+        .status(401)
+        .json({ message: 'Brak dostępu. Niepodano tokenu.' });
+    }
+
+    const decodedToken = jwt.verify(token, config.jwtSecret);
+    const employeeId = decodedToken.employeeId;
+
+    const permissionNumber = await Employee.findOne({
+      attributes: ['uprawnienia'],
+      where: { id: employeeId },
+    });
+
+    if (!permissionNumber) {
+      return res.status(404).json({ error: 'Użytkownik nie znaleziony' });
+    }
+
+    res.json({ permissionNumber: permissionNumber.uprawnienia });
+  } catch (error) {
+    res.status(500).json({ error: 'Błąd serwera' });
+  }
+};
+
 /*exports.loginCMS = async (req, res) => {
   const { login, haslo, nieWylogowuj } = req.body;
 

@@ -20,12 +20,16 @@ export class AuthCMSService {
 
   constructor(private http: HttpClient, private router: Router) {
     this.accessTokenSubject = new BehaviorSubject<string | null>(this.getStoredAccessToken());
-    if (typeof localStorage !== 'undefined') {
+    /*if (typeof localStorage !== 'undefined') {
       const expirationTimeString = localStorage.getItem('expirationTime');
       const nieWylogowuj = localStorage.getItem('nieWylogowuj') === 'true';
       this.initSessionTimeout(expirationTimeString, nieWylogowuj);
       this.initLogoutOnUnload();
-    }
+    }*/
+    const expirationTimeString = this.getCookie('expirationTime');
+    const nieWylogowuj = this.getCookie('nieWylogowuj') === 'true';
+    this.initSessionTimeout(expirationTimeString, nieWylogowuj);
+    this.initLogoutOnUnload();
   }
 
   get accessToken$(): Observable<string | null> {
@@ -33,19 +37,42 @@ export class AuthCMSService {
   }
 
   setAccessToken(token: string, nieWylogowuj: boolean): void {
-    localStorage.setItem('accessToken', token);
+    /*localStorage.setItem('accessToken', token);
     localStorage.setItem('nieWylogowuj', String(nieWylogowuj));
     const expiresIn = nieWylogowuj ? '30d' : '7h';
     const expirationTime = new Date().getTime() + this.parseExpirationTime(expiresIn);
     localStorage.setItem('expirationTime', expirationTime.toString());
+    this.accessTokenSubject.next(token);*/
+    this.setCookie('accessToken', token);
+    this.setCookie('nieWylogowuj', String(nieWylogowuj));
+    const expiresIn = nieWylogowuj ? '30d' : '7h';
+    const expirationTime = new Date().getTime() + this.parseExpirationTime(expiresIn);
+    this.setCookie('expirationTime', expirationTime.toString());
     this.accessTokenSubject.next(token);
+    this.router.navigate(['/cms/logged/aktualnosci']);
   }
 
   private getStoredAccessToken(): string | null {
-    if (typeof localStorage !== 'undefined') {
+    /*if (typeof localStorage !== 'undefined') {
       return localStorage.getItem('accessToken');
     } else {
       return null;
+    }*/
+    return this.getCookie('accessToken');
+  }
+
+  private getCookie(name: string): string | null {
+    if (typeof document !== 'undefined') {
+      const value = `; ${document.cookie}`;
+      const parts = value.split(`; ${name}=`);
+      if (parts.length === 2) return parts.pop()?.split(';').shift() || null;
+    }
+    return null;
+  }
+
+  private setCookie(name: string, value: string): void {
+    if (typeof document !== 'undefined') {
+      document.cookie = `${name}=${value}`;
     }
   }
 
@@ -64,12 +91,20 @@ export class AuthCMSService {
   }
 
   private initLogoutOnUnload(): void {
-    window.addEventListener('beforeunload', () => {
+    /*window.addEventListener('beforeunload', () => {
       const nieWylogowujValue = localStorage.getItem('nieWylogowuj');
       if (nieWylogowujValue === 'false') {
         this.logout();
       }
-    });
+    });*/
+    if (typeof window !== 'undefined') {
+      window.addEventListener('beforeunload', () => {
+        const nieWylogowujValue = this.getCookie('nieWylogowuj');
+        if (nieWylogowujValue === 'false') {
+          this.logout();
+        }
+      });
+    }
   }
   private parseExpirationTime(expiresIn: string): number {
     const units: { [key: string]: number } = {
@@ -88,12 +123,29 @@ export class AuthCMSService {
 
   // guard
   isEmployeeLoggedIn(): Observable<boolean> {
-    const token = this.getStoredAccessToken();
-    return of(!!token);
+    /*const token = this.getStoredAccessToken();
+    return of(!!token);*/
+    try {
+      const token = this.getStoredAccessToken();
+      return of(!!token);
+    } catch (error) {
+      console.error('Błąd podczas sprawdzania zalogowania:', error);
+      return of(false); // lub można również zwrócić throwError(error) w przypadku bardziej zaawansowanej obsługi błędów
+    }
   }
 
-  getPermission() {
-    return this.http.get<any>(this.baseUrl + this.permissionUrl);
+  getPermission(): Observable<{ permissionNumber: number }> {
+    return this.http.get<{ permissionNumber: number }>(this.baseUrl + this.permissionUrl, { withCredentials: true });
+    /*return new Promise((resolve, reject) => {
+      this.http.get<any>(this.baseUrl + this.permissionUrl).subscribe(
+        response => {
+          resolve(response.permissionNumber);
+        },
+        error => {
+          reject(error);
+        }
+      )
+    })*/
   }
 
   // wywoływane
@@ -117,15 +169,19 @@ export class AuthCMSService {
         tap(response => {
           if (response && response.accessToken) {
             this.setAccessToken(response.accessToken, nieWylogowuj);
-            this.router.navigate(['/cms/logged/aktualnosci']);
           }
         })
       );
   }
 
   logout(): void {
-    localStorage.removeItem('accessToken');
+    /*localStorage.removeItem('accessToken');
     localStorage.removeItem('expirationTime');
+    this.accessTokenSubject.next(null);
+    this.router.navigate(['/cms/login']);*/
+    document.cookie = 'accessToken=;expires=Thu, 01 Jan 1970 00:00:00 GMT';
+    document.cookie = 'expirationTime=;expires=Thu, 01 Jan 1970 00:00:00 GMT';
+    document.cookie = 'nieWylogowuj=;expires=Thu, 01 Jan 1970 00:00:00 GMT';
     this.accessTokenSubject.next(null);
     this.router.navigate(['/cms/login']);
   }

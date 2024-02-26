@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 
 import { cmsAuthGuard } from './guards/cmsAuth/cms-auth.guard';
+import { cmsPermissionGuard } from './guards/cmsPermission/cms-permission.guard';
 
 import { AppComponent } from './app.component';
 import { CmsPustyComponent } from './views/cms-pusty/cms-pusty.component';
@@ -24,7 +25,7 @@ export const routes: Routes = [
                     {
                         path: 'logged', component: CmsComponent, canActivate: [cmsAuthGuard], children: [
                             { path: 'aktualnosci', component: AktualnosciComponent },
-                            { path: 'pracownicy', component: PracownicyComponent },
+                            { path: 'pracownicy', component: PracownicyComponent, canActivate: [cmsPermissionGuard], data: { requiredPermission: 6 } },
                             { path: 'employeeEdit/:id', component: EdycjaPracownikaComponent },
                             { path: 'employeeRegister', component: EmployeeRegisterComponent }
                         ]
