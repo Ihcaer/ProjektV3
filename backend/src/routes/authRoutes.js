@@ -7,6 +7,7 @@ const router = express.Router();
 //router.use(authMiddleware);
 
 router.get('/permission', CMSauthController.checkPermission);
+router.get('/getId', CMSauthController.getId);
 router.post('/login', CMSauthController.loginCMS);
 router.get('/generateUniqueCode', CMSauthController.generateUniqueCode);
 router.post('/checkCodeUniq/:verCode', CMSauthController.checkVerCode);

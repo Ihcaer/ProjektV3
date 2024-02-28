@@ -9,23 +9,22 @@ import { Router } from '@angular/router';
 })
 export class AuthCMSService {
   private baseUrl = 'http://localhost:3000';
-  private checkCodeUniqUrl = '/cms/checkCodeUniq';
-  private generateUniqueCodeUrl = '/cms/generateUniqueCode'
-  private cmsRegisterUrl = '/cms/register';
-  private cmsCreatingEmployeeUrl = '/cms/creatingEmployee';
-  private cmsLoginUrl = '/cms/login';
-  private permissionUrl = '/cms/permission';
+  private additionalUrl = '/cms';
+  private checkCodeUniqUrl = '/checkCodeUniq';
+  private generateUniqueCodeUrl = '/generateUniqueCode'
+  private cmsRegisterUrl = '/register';
+  private cmsCreatingEmployeeUrl = '/creatingEmployee';
+  private cmsLoginUrl = '/login';
+  private permissionUrl = '/permission';
+  private idUrl = '/getId';
+
+  private frontendLoginUrl = '/cms/login';
+  private frontendAktualnosciCms = '/cms/logged/aktualnosci';
 
   private accessTokenSubject: BehaviorSubject<string | null>;
 
   constructor(private http: HttpClient, private router: Router) {
     this.accessTokenSubject = new BehaviorSubject<string | null>(this.getStoredAccessToken());
-    /*if (typeof localStorage !== 'undefined') {
-      const expirationTimeString = localStorage.getItem('expirationTime');
-      const nieWylogowuj = localStorage.getItem('nieWylogowuj') === 'true';
-      this.initSessionTimeout(expirationTimeString, nieWylogowuj);
-      this.initLogoutOnUnload();
-    }*/
     const expirationTimeString = this.getCookie('expirationTime');
     const nieWylogowuj = this.getCookie('nieWylogowuj') === 'true';
     this.initSessionTimeout(expirationTimeString, nieWylogowuj);
@@ -37,27 +36,16 @@ export class AuthCMSService {
   }
 
   setAccessToken(token: string, nieWylogowuj: boolean): void {
-    /*localStorage.setItem('accessToken', token);
-    localStorage.setItem('nieWylogowuj', String(nieWylogowuj));
-    const expiresIn = nieWylogowuj ? '30d' : '7h';
-    const expirationTime = new Date().getTime() + this.parseExpirationTime(expiresIn);
-    localStorage.setItem('expirationTime', expirationTime.toString());
-    this.accessTokenSubject.next(token);*/
     this.setCookie('accessToken', token);
     this.setCookie('nieWylogowuj', String(nieWylogowuj));
     const expiresIn = nieWylogowuj ? '30d' : '7h';
     const expirationTime = new Date().getTime() + this.parseExpirationTime(expiresIn);
     this.setCookie('expirationTime', expirationTime.toString());
     this.accessTokenSubject.next(token);
-    this.router.navigate(['/cms/logged/aktualnosci']);
+    this.router.navigate([this.frontendAktualnosciCms]);
   }
 
   private getStoredAccessToken(): string | null {
-    /*if (typeof localStorage !== 'undefined') {
-      return localStorage.getItem('accessToken');
-    } else {
-      return null;
-    }*/
     return this.getCookie('accessToken');
   }
 
@@ -91,12 +79,6 @@ export class AuthCMSService {
   }
 
   private initLogoutOnUnload(): void {
-    /*window.addEventListener('beforeunload', () => {
-      const nieWylogowujValue = localStorage.getItem('nieWylogowuj');
-      if (nieWylogowujValue === 'false') {
-        this.logout();
-      }
-    });*/
     if (typeof window !== 'undefined') {
       window.addEventListener('beforeunload', () => {
         const nieWylogowujValue = this.getCookie('nieWylogowuj');
@@ -123,48 +105,40 @@ export class AuthCMSService {
 
   // guard
   isEmployeeLoggedIn(): Observable<boolean> {
-    /*const token = this.getStoredAccessToken();
-    return of(!!token);*/
     try {
       const token = this.getStoredAccessToken();
       return of(!!token);
     } catch (error) {
       console.error('Błąd podczas sprawdzania zalogowania:', error);
-      return of(false); // lub można również zwrócić throwError(error) w przypadku bardziej zaawansowanej obsługi błędów
+      return of(false);
     }
   }
 
   getPermission(): Observable<{ permissionNumber: number }> {
-    return this.http.get<{ permissionNumber: number }>(this.baseUrl + this.permissionUrl, { withCredentials: true });
-    /*return new Promise((resolve, reject) => {
-      this.http.get<any>(this.baseUrl + this.permissionUrl).subscribe(
-        response => {
-          resolve(response.permissionNumber);
-        },
-        error => {
-          reject(error);
-        }
-      )
-    })*/
+    return this.http.get<{ permissionNumber: number }>(this.baseUrl + this.additionalUrl + this.permissionUrl, { withCredentials: true });
   }
 
-  // wywoływane
+  // komponent
+  getId(): Observable<{ id: number }> {
+    return this.http.get<{ id: number }>(this.baseUrl + this.additionalUrl + this.idUrl, { withCredentials: true });
+  }
+
   creatingEmployee(credentials: { imie: string, nazwisko: string, uprawnienia: number, kodWeryfikacyjny: number }): Observable<any> {
-    return this.http.post<any>(`${this.baseUrl}${this.cmsCreatingEmployeeUrl}`, credentials);
+    return this.http.post<any>(`${this.baseUrl}${this.additionalUrl}${this.cmsCreatingEmployeeUrl}`, credentials);
   }
   checkCodeUniq(kodWeryfikacyjny: number): Observable<boolean> {
-    return this.http.get<boolean>(`${this.baseUrl}${this.checkCodeUniqUrl}/${kodWeryfikacyjny}`);
+    return this.http.get<boolean>(`${this.baseUrl}${this.additionalUrl}${this.checkCodeUniqUrl}/${kodWeryfikacyjny}`);
   }
   generateUniqueCode(): Observable<number> {
-    return this.http.get<number>(`${this.baseUrl}${this.generateUniqueCodeUrl}`);
+    return this.http.get<number>(`${this.baseUrl}${this.additionalUrl}${this.generateUniqueCodeUrl}`);
   }
 
   registerCMS(credentials: { login: string, haslo: string, kodWeryfikacyjny: string }): Observable<any> {
-    return this.http.post<any>(`${this.baseUrl}${this.cmsRegisterUrl}`, credentials);
+    return this.http.post<any>(`${this.baseUrl}${this.additionalUrl}${this.cmsRegisterUrl}`, credentials);
   }
 
   loginCMS(credentials: { login: string; haslo: string }, nieWylogowuj: boolean): Observable<any> {
-    return this.http.post<any>(`${this.baseUrl}${this.cmsLoginUrl}`, credentials, { withCredentials: true })
+    return this.http.post<any>(`${this.baseUrl}${this.additionalUrl}${this.cmsLoginUrl}`, credentials, { withCredentials: true })
       .pipe(
         tap(response => {
           if (response && response.accessToken) {
@@ -175,14 +149,10 @@ export class AuthCMSService {
   }
 
   logout(): void {
-    /*localStorage.removeItem('accessToken');
-    localStorage.removeItem('expirationTime');
-    this.accessTokenSubject.next(null);
-    this.router.navigate(['/cms/login']);*/
     document.cookie = 'accessToken=;expires=Thu, 01 Jan 1970 00:00:00 GMT';
     document.cookie = 'expirationTime=;expires=Thu, 01 Jan 1970 00:00:00 GMT';
     document.cookie = 'nieWylogowuj=;expires=Thu, 01 Jan 1970 00:00:00 GMT';
     this.accessTokenSubject.next(null);
-    this.router.navigate(['/cms/login']);
+    this.router.navigate([this.frontendLoginUrl]);
   }
 }

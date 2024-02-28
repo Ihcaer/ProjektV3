@@ -31,38 +31,33 @@ exports.checkPermission = async (req, res) => {
   }
 };
 
-/*exports.loginCMS = async (req, res) => {
-  const { login, haslo, nieWylogowuj } = req.body;
-
+exports.getId = async (req, res) => {
   try {
-    const employee = await Employee.findOne({ where: { login } });
+    const token = req.cookies.accessToken;
 
-    if (!employee) {
-      return res.status(404).json({ message: 'Login lub hasło nieprawidłowe' });
+    if (!token) {
+      return res
+        .status(401)
+        .json({ message: 'Brak dostępu. Niepodano tokenu.' });
     }
 
-    const passwordMatch = await bcryptUtils.comparePassword(
-      haslo,
-      employee.haslo
-    );
+    const decodedToken = jwt.verify(token, config.jwtSecret);
+    const employeeId = decodedToken.employeeId;
 
-    if (!passwordMatch) {
-      return res.status(401).json({ message: 'Login lub hasło nieprawidłowe' });
+    const id = await Employee.findOne({
+      attributes: ['id'],
+      where: { id: employeeId },
+    });
+
+    if (!id) {
+      return res.status(404).json({ error: 'Użytkownik nie znaleziony' });
     }
-
-    const expiresIn = nieWylogowuj ? '30d' : '7h';
-    const accessToken = jwt.sign(
-      { employeeId: employee.id },
-      config.jwtSecret,
-      { expiresIn }
-    );
-
-    res.json({ accessToken });
+    res.json({ id: id.id });
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: 'Błąd serwera' });
+    res.status(500).json({ error: 'Błąd serwera' });
   }
-};*/
+};
+
 exports.loginCMS = async (req, res) => {
   const { login, haslo, nieWylogowuj } = req.body;
 
@@ -119,26 +114,6 @@ exports.creatingEmployee = async (req, res) => {
 };
 
 exports.registerCMS = async (req, res) => {
-  /*const { login, haslo } = req.body;
-
-  try {
-    const existingUser = await Employee.findOne({ where: { login } });
-
-    if (existingUser) {
-      return res.status(400).json({ message: 'Ten login jest zajęty' });
-    }
-
-    const hashedPassword = await bcryptUtils.hashPassword(haslo);
-    const newEmployee = await Employee.create({
-      login,
-      haslo: hashedPassword,
-    });
-
-    res.status(201).json({ message: 'Pracownik dodany pomyślnie' });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: 'Błąd serwera' });
-  }*/
   const { login, haslo, kodWeryfikacyjny } = req.body;
 
   try {

@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
 import { MatStepperModule, MatStepper } from '@angular/material/stepper';
 import { tap, catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
@@ -67,7 +67,7 @@ export class CmsRegisterComponent {
           this.CMSAuthService.registerCMS(credentials).pipe(
             tap((response) => {
               console.log(response);
-              this.router.navigate(['/cms/login']);
+              this.stepper?.next();
             }),
             catchError((error) => {
               if (error.status) {
@@ -89,24 +89,7 @@ export class CmsRegisterComponent {
     }
   }
 
-  /*zarejestruj() {
-    const credentials = this.registerCMS.value;
-    if (this.registerCMS.valid) {
-      this.CMSAuthService.registerCMS(credentials).pipe(
-        tap((response) => {
-          console.log(response);
-        }),
-        catchError((error) => {
-          if (error.status) {
-            if (error.status === 400) {
-              console.error("Podany login już istnieje", error);
-            } else if (error.status === 500) {
-              console.error("Błąd serwera", error);
-            }
-          }
-          return of(error);
-        })
-      ).subscribe();
-    }
-  }*/
+  navigateToCmsLogin() {
+    this.router.navigate(['/cms/login']);
+  }
 }
