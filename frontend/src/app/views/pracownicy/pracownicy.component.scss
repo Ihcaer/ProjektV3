@@ -4,6 +4,13 @@
 .dane > td {
   text-align: center;
 }
+.ikonyUprawnienia {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  gap: 10px;
+  color: #00770c;
+}
 .ikonyAkcje {
   display: flex;
   gap: 10px;

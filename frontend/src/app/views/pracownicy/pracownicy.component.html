@@ -13,7 +13,16 @@
       <tr class="dane" *ngFor="let pracownik of employees">
         <td>{{ pracownik.imie }}</td>
         <td>{{ pracownik.nazwisko }}</td>
-        <td>{{ pracownik.uprawnienia }}</td>
+        <td>
+          <div class="ikonyUprawnienia">
+            <mat-icon
+              *ngFor="let icon of getPermissionIcon(pracownik.uprawnienia)"
+              [matTooltip]="getPermissionIconTooltip(icon)"
+              matTooltipPosition="above"
+              >{{ icon }}</mat-icon
+            >
+          </div>
+        </td>
         <td class="ikonyAkcje">
           <mat-icon
             class="ikonaEdycjaPracownika"
